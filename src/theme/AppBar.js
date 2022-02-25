@@ -5,9 +5,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
-import MenuIcon from '@mui/icons-material/Menu';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import LoginIcon from '@mui/icons-material/Login';
 import { Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
 
 const drawerWidth = 0;
 
@@ -30,14 +31,9 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 function Layout() {
-  const [open, setOpen] = React.useState(true);
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
-
   return (
     <div>
-        <AppBar position="absolute" open={open}>
+        <AppBar position="absolute" color="neutral">
           <Toolbar
             sx={{
               pr: '24px', // keep right padding when drawer closed
@@ -45,29 +41,31 @@ function Layout() {
           >
             <IconButton
               edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
+              color="dark"
+              aria-label="open drawer" 
               sx={{
                 marginRight: '36px',
                 //...(open && { display: 'none' }),
               }}
+              component={Link} to="/"
             >
-              <MenuIcon />
+              <Avatar src={process.env.PUBLIC_URL + "/LogoP.png"} />
             </IconButton>
             <Typography
               component="h1"
               variant="h6"
-              color="inherit"
+              color="dark.main"
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
+            <IconButton color="dark" component={Link} to="/login">
+              <Typography color="dark.main">
+                <Badge badgeContent='Login' color="primary">
+                  <LoginIcon />
+                </Badge>
+              </Typography>
             </IconButton>
           </Toolbar>
         </AppBar>
