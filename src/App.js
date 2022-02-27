@@ -10,6 +10,7 @@ import { theme } from './theme/theme';
 import Layout from './theme/AppBar';
 import MainPage from './main-page/MainPage'
 import CreateUser from './users/CreateUser';
+import ProjectsList from './admin/projects-list/ProjectsList';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         </Route>
         <Route path="/profile" element={<MainPage />}>
           <Route path="add-developer" element={<CreateUser />}/>
+          <Route path="projects-list" element={<ProjectsList />}/>
         </Route>
       </Routes>
     </ThemeProvider>
