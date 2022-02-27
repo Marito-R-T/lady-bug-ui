@@ -8,15 +8,20 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { theme } from './theme/theme';
 import Layout from './theme/AppBar';
+import MainPage from './main-page/MainPage'
+import CreateUser from './users/CreateUser';
 
 function App() {
   return (
     <div className="App">
     <ThemeProvider theme={theme}>
-        <CssBaseline />
+      <CssBaseline />
       <Routes>
         <Route path="/" element={<Layout />} >
-          <Route path="Login" element={<LogIn />}/>
+          <Route path="login" element={<LogIn />}/>
+        </Route>
+        <Route path="/profile" element={<MainPage />}>
+          <Route path="add-developer" element={<CreateUser />}/>
         </Route>
       </Routes>
     </ThemeProvider>
