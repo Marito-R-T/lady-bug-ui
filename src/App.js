@@ -3,6 +3,7 @@ import {
   Route } from 'react-router-dom';
 import './App.css';
 import LogIn from './log-in/LogIn';
+import CreateProject from './admin/CreateProject';
 import * as React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />} >
           <Route path="Login" element={<LogIn />}/>
+          <Route path="admin/CreateProject" element={<CreateProject />}/>
         </Route>
       </Routes>
     </ThemeProvider>

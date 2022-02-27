@@ -40,7 +40,7 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Container component="main" maxWidth="xs" >
           <CssBaseline />
           <Box
