@@ -8,6 +8,7 @@ export const theme = createTheme({
       primary: {
         main: '#f15454',
         darker: '#942B3B',
+        clear: '#eddfe9',
         contrastText: '#000000'
       },
       neutral: {
@@ -19,7 +20,9 @@ export const theme = createTheme({
       },
       dark: {
         //main: '#002A62'
-        main: '#002A62'
+        main: '#002A62',
+        black: '#000000',
+        green: '#036666'
       },
       white: '#ffffff'
     },
