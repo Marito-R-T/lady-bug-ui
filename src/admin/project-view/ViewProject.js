@@ -14,7 +14,7 @@ const mainFeaturedPost = {
   status: 'in progress'
 };
 
-const featuredPosts = [
+const Cases = [
   {
     nameType: 'Featured post',
     startDate: 'Nov 12, 2000',
@@ -24,7 +24,7 @@ const featuredPosts = [
     status: 'inProgress',
   },
   {
-    nameType: 'Featured post',
+    nameType: 'Featured ',
     startDate: 'Nov 12, 2000',
     dueDate: 'Nov 12, 2001',
     description:
@@ -32,7 +32,7 @@ const featuredPosts = [
     status: 'Canceled',
   },
   {
-    nameType: 'Featured post',
+    nameType: 'Featur',
     startDate: 'Nov 12, 2000',
     dueDate: 'Nov 12, 2001',
     description:
@@ -59,9 +59,9 @@ export default function Blog() {
             </Box>
             <Box
               px={{ xs:3, sm:5 }}
-              py={{ xs:3, sm:5 }}>
+              py={{ xs:3, sm:2 }}>
               <Grid container spacing={1}>
-                {featuredPosts.map((post) => (
+                {Cases.map((post) => (
                   <CaseView key={post.title} post={post} />
                 ))}
               </Grid>

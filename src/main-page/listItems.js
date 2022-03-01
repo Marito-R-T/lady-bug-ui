@@ -32,11 +32,11 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Project" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="project-view">
       <ListItemIcon>
-        <BarChartIcon />
+        <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Reports" />
+      <ListItemText primary="Project" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
