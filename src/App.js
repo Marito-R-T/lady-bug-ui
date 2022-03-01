@@ -11,7 +11,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { theme } from './theme/theme';
 import Layout from './theme/AppBar';
 import MainPage from './main-page/MainPage'
-import CreateUser from './users/CreateUser';
+import CreateUser from './admin/CreateUser';
+import ViewProject from './admin/project-view/ViewProject'
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
           <Route path="profile/:id" element={<UserProfile/>}/> 
           <Route path="create_project" element={<CreateProject />}/> 
           <Route path="add-developer" element={<CreateUser />}/>
-          
+          <Route path="project-view" element={<ViewProject />} />
         </Route>
 
       </Routes>
