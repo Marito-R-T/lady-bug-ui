@@ -12,20 +12,25 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 
-function UserProfile() {
-    //const [user, setUser] = React.useState(null)
+function Phase() {
+    const [user, setUser] = React.useState(null)
     const { id } = useParams();
     useEffect(() => {
-        fetchUser();
+        fetchPhase();
     }, []);
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: id })
+    };
 
 
-    const fetchUser = async () => {
-        const data = await fetch('https://api.imgflip.com/get_memes');
+    const fetchPhase = async () => {
+        const data = await fetch('https://api.imgflip.com/get_memes',requestOptions);
         const items = await data.json();
-        console.log(items)
         console.log(id)
-        //setUser(items);
+        setUser(items);
+        console.log(user)
     }
 
     return (
@@ -39,63 +44,66 @@ function UserProfile() {
                 noValidate
                 autoComplete="off"
             >
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-
-                    <Stack direction="row" spacing={2}>
-                        <Avatar
-                            alt="B"
-                            src={process.env.PUBLIC_URL + "/bee.jpg"}
-                            sx={{ width: 200, height: 200 }}
-                        />
-                    </Stack>
-
-                </div>
+                
                 <Typography sx={{ topMargin: '36px',mt: 3, mb: 2 }} variant="h2" color="dark.main" component="div">
-                    Jose Gomez
+                    Testing
                 </Typography>
                 <br></br>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Card color="dark.main" sx={{ backgroundColor:'primary.clear',maxWidth: 350, minWidth: 350 , maxHeight: 250, minHeight:250,marginRight: '36px'}}>
+                    <Card color="dark.main" sx={{ backgroundColor:'primary.clear',maxWidth: 390, minWidth: 390 , maxHeight: 250, minHeight:250,marginRight: '36px'}}>
                         <CardContent >
                             <Typography variant="h4" sx={{ fontSize: 24 }} color="dark.main" gutterBottom>
-                                Personal Information
+                            Execution 
                             </Typography>
                             <Typography variant="h6" component="div" color="black">
-                                Email:
+                                Developer:
                             </Typography>
-                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                jgomez1995@gmail.com
+                            <Typography sx={{ mb: 1.5 }} color="secondary">
+                                You
                             </Typography>
-                            <Typography variant="h6" component="div" color="black">
-                                Full Name:
+                            <br></br>
+                            <Typography display="inline" variant="h6" component="div" color="black">
+                                Start Date:
                             </Typography>
-                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                Jose Armando Gomez
+                            <Typography display="inline" sx={{ mb: 1.5 }} color="text.secondary">
+                                 10/10/22
+                            </Typography>
+                            <br></br>
+                            <br></br>
+                            <Typography display="inline" variant="h6" component="div" color="black">
+                                Due Date: 
+                            </Typography>
+                            <Typography display="inline" sx={{ mb: 1.5 }} color="text.secondary">
+                                 28/10/22
                             </Typography>
                         </CardContent>
 
                     </Card>
-                    <Card color="secondary" sx={{ backgroundColor:'primary.clear',maxWidth: 350, minWidth: 350, maxHeight: 250, minHeight:250 }}>
+                    <Card color="secondary" sx={{ backgroundColor:'primary.clear',maxWidth: 390, minWidth: 390, maxHeight: 250, minHeight:250 }}>
                         <CardContent>
                             <Typography variant="h4" sx={{ fontSize: 24 }} color="dark.main" gutterBottom>
-                                Work Stats
+                                Case Information
                             </Typography>
                             <Typography variant="h6" component="div" color="black">
-                                Projects Worked On:
-                            </Typography>
-                            <Typography sx={{ mb: 1.5 }} color="secondary">
-                                10
-                            </Typography>
-                            <Typography variant="h6" component="div" color="black">
-                                User Creation Date
+                                Project Name:
                             </Typography>
                             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                10/10/20
+                                Lady Bugger
+                            </Typography>
+                            <Typography variant="h6" component="div" color="black">
+                                Case Name:
+                            </Typography>
+                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                Login Bugs
+                            </Typography>
+                            <Typography variant="h6" component="div" color="black">
+                                Case Description
+                            </Typography>
+                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                This case is for fixing login problems
                             </Typography>
                         </CardContent>
-                        <CardActions>
-                            <Button size="small">View Projects</Button>
-                        </CardActions>
+                       
 
                     </Card>
 
@@ -112,4 +120,4 @@ function UserProfile() {
     );
 }
 
-export default UserProfile
+export default Phase

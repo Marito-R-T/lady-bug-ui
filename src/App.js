@@ -6,6 +6,8 @@ import LogIn from './log-in/LogIn';
 import CreateProject from './admin/CreateProject';
 import CreateCaseType from './admin/CreateCaseType';
 import UserProfile from './admin/UserProfile';
+import UserPhases from './admin/UserPhases';
+import Phase from './admin/Phase';
 import * as React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -28,6 +30,8 @@ function App() {
         </Route>
         <Route path="/" element={<MainPage />}>
           <Route path="profile/:id" element={<UserProfile/>}/> 
+          <Route path="phase/:id" element={<Phase/>}/> 
+          <Route path="user_phases/:id" element={<UserPhases/>}/> 
           <Route path="create_project" element={<CreateProject />}/> 
           <Route path="create_case_type" element={<CreateCaseType />}/> 
           <Route path="add-developer" element={<CreateUser />}/>

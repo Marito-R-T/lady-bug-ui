@@ -9,7 +9,7 @@ import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -46,7 +46,6 @@ function CreateCaseType() {
     const [rows, setRows] = useState([
         { id: 1, name: "First Phase" },
     ]);
-    const [disable, setDisable] = React.useState(true);
     const [isAdd, setAdd] = React.useState(false);
     const [showConfirm, setShowConfirm] = React.useState(false);
     const [showAdd, setShowAdd] = React.useState(false);
@@ -73,8 +72,9 @@ function CreateCaseType() {
     };
     const setAddNo = () => {
         setShowAdd(false);
+        console.log(showAdd)
     };
-    const [rowsData, setRowsData] = useState([]);
+
     const handleRemoveClick = (i) => {
         console.log(i)
         console.log(rows)
@@ -95,35 +95,10 @@ function CreateCaseType() {
         setAdd(false)
     };
 
-    const handleInputChange = (e, index) => {
-        setDisable(false);
-        const { name, value } = e.target;
-        const list = [...rows];
-        list[index][name] = value;
-        setRows(list);
-    };
-    const addTableRows = () => {
 
-        const rowsInput = {
-            fullName: '',
-            emailAddress: '',
-            salary: ''
-        }
-        setRowsData([...rowsData, rowsInput])
 
-    }
-    const deleteTableRows = (index) => {
-        const rows = [...rowsData];
-        rows.splice(index, 1);
-        setRowsData(rows);
-    }
-    const handleChange = (index, evnt) => {
 
-        const { name, value } = evnt.target;
-        const rowsInput = [...rowsData];
-        rowsInput[index][name] = value;
-        setRowsData(rowsInput);
-    }
+
 
 
     return (

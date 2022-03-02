@@ -11,6 +11,11 @@ function CreateProject() {
     useEffect(() => {
         fetchItems();
     }, []);
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: 1 })
+    };
 
     const [items, setItems] = useState([]);
 
