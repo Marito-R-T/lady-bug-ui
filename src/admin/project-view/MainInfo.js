@@ -6,9 +6,14 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import CaseCreateModal from '../../project-manager/CaseCreateModal';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 function MainInfo(props) {
   const { post } = props;
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {setOpen(true);}
+  const handleClose = () => setOpen(false);
 
   return (
     <Paper
@@ -42,10 +47,23 @@ function MainInfo(props) {
               pr: { md: 0 },
             }}
           >
-            <Typography component="h1" variant="h3" color="dark.black" gutterBottom>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={2} />
+            <Grid item xs={12} sm={8}>
+              <Typography component="h1" variant="h3" color="dark.black" gutterBottom>
                 <b>
-              {post.name}</b>
-            </Typography>
+                {post.name}</b>
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={2}>
+              <Button variant="outlined" startIcon={<AddBoxIcon />} onClick={handleOpen}>
+                <Typography variant="subtitle" color="dark.black">
+                  Add Case
+                </Typography>
+              </Button>
+              <CaseCreateModal open={open} handleClose={handleClose}/>
+            </Grid>
+          </Grid>
             <Typography variant="h5" color="dark.black" paragraph>
               {post.description}
             </Typography>

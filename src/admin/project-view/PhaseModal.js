@@ -8,6 +8,8 @@ import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import SaveIcon from '@mui/icons-material/Save';
 
 const style = {
   position: 'absolute',
@@ -23,7 +25,10 @@ const style = {
 };
 
 export default function PhaseModal(props) {
-  return (
+    const saveInformation = (event) => {
+        console.log("saved");
+    };
+    return (
         <Modal
             open={props.open}
             onClose={props.handleClose}
@@ -31,9 +36,18 @@ export default function PhaseModal(props) {
             aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Phase View
-                </Typography>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sm={10}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                            Phase View
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={1}>
+                        <IconButton aria-label="delete" color="dark" onClick={saveInformation}>
+                            <SaveIcon />
+                        </IconButton>
+                    </Grid>
+                </Grid>
                 <Divider />
                 <DateTimeRangePicker color="#f15454"/>
                 <Divider />
@@ -52,6 +66,26 @@ export default function PhaseModal(props) {
                         />
                     </Grid>
                 </Grid>
+                <Box py={2}/>
+                <TextField
+                id="dev-work"
+                label="Developer Work"
+                disabled
+                defaultValue={"Hola que tal asdfadsfasdfdasfdsafds"}
+                multiline
+                color = "dark"
+                fullWidth
+                rows={6}
+                />
+                <Box py={2}/>
+                <TextField
+                id="comment"
+                label="Comment to Work"
+                multiline
+                color = "dark"
+                fullWidth
+                rows={6}
+                />
             </Box>
         </Modal>
   );
