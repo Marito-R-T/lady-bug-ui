@@ -4,14 +4,13 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import DvrIcon from '@mui/icons-material/Dvr';
 import PeopleIcon from '@mui/icons-material/People';
-import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { Link } from 'react-router-dom';
+import DvrIcon from '@mui/icons-material/Dvr';
 
 export const mainListItems = (
   <React.Fragment>
@@ -33,11 +32,11 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Projects List" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="project-view">
       <ListItemIcon>
-        <BarChartIcon />
+        <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Reports" />
+      <ListItemText primary="Project" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>

@@ -9,6 +9,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+
 //import logo from '/Logo.png';
 
 function GetLogo() {
@@ -27,7 +28,7 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Container component="main" maxWidth="xs" >
           <CssBaseline />
           <Box
