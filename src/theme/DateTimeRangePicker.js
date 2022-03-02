@@ -6,12 +6,11 @@ import DateRangePicker from '@mui/lab/DateRangePicker';
 import MobileDateTimePicker from '@mui/lab/MobileDateTimePicker';
 import Typography from '@mui/material/Typography';
 
-export default function DateTimeRangePicker() {
+export default function DateTimeRangePicker(props) {
     const [value, setValue] = React.useState([null, null]);
   const [valuei, setValuei] = React.useState(null);
   const [valuef, setValuef] = React.useState(null);
-  console.log(valuei);
-  console.log(valuef);
+  console.log("Color: "+props.color);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -34,7 +33,7 @@ export default function DateTimeRangePicker() {
                   ref={params.inputRef}
                   {...params.inputProps}
                   placeholder="mm/dd/yyy hh:mm"
-                  style={{ border: 'none', width: 140, backgroundColor: '#8ab5b5' }}
+                  style={{ border: 'none', width: 140, backgroundColor: props.color }}
                 />
               )}
             />
@@ -53,7 +52,7 @@ export default function DateTimeRangePicker() {
                   ref={params.inputRef}
                   {...params.inputProps}
                   placeholder="mm/dd/yyy hh:mm"
-                  style={{ border: 'none', width: 140, backgroundColor: '#8ab5b5' }}
+                  style={{ border: 'none', width: 140, backgroundColor: props.color }}
                 />
               )}
             />

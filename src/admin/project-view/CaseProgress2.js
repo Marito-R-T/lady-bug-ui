@@ -48,11 +48,6 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
 function ColorlibStepIcon(props) {
   const { active, completed, className } = props;
 
-  const icons = {
-    1: <Avatar src={process.env.PUBLIC_URL + "/leaf.png"}/>,
-    2: <Avatar src={process.env.PUBLIC_URL + "/LogoP.png"}/>,
-  };
-
   return (
     <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
       {active ? (
@@ -94,7 +89,7 @@ export default function StepCase() {
     <Stack sx={{ width: '100%' }} spacing={4}>
       <Stepper alternativeLabel activeStep={5} connector={<ColorlibConnector />}>
         {steps.map((label) => (
-          <Step key={label}>
+          <Step>
             <StepLabel StepIconComponent={ColorlibStepIcon}></StepLabel>
           </Step>
         ))}

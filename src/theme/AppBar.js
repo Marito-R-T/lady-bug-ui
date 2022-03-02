@@ -60,6 +60,9 @@ function Layout() {
             >
               
             </Typography>
+            <IconButton color="dark" component={Link} to="/profile">
+                  <LoginIcon />
+            </IconButton>
             <IconButton color="dark" component={Link} to="/login">
               <Typography color="dark.main">
                 <Badge badgeContent='Login' color="primary">

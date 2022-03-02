@@ -3,41 +3,41 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Checkbox from '@mui/material/Checkbox';
-import Avatar from '@mui/material/Avatar';
-import DateTimeRangePicker from '../../theme/DateTimeRangePicker'
+import DateTimeRangePicker from '../../theme/DateTimeRangePicker';
+import PhaseModal from './PhaseModal';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function Phase(props) {
-    const [checked, setChecked] = React.useState([1]);
-  
-    const handleToggle = (value) => () => {
-      const currentIndex = checked.indexOf(value);
-      const newChecked = [...checked];
-  
-      if (currentIndex === -1) {
-        newChecked.push(value);
-      } else {
-        newChecked.splice(currentIndex, 1);
-      }
-  
-      setChecked(newChecked);
-    };
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => {setOpen(true);}
+    const handleClose = () => setOpen(false);
 
     return (
         <ListItem
-            key={props.info.nameType+props.i}
             disablePadding
             secondaryAction={
               <div>
-                <DateTimeRangePicker/>
+                <DateTimeRangePicker color="#8ab5b5"/>
               </div>
             }
           >
-            <ListItemButton>
+            <ListItemButton onClick={handleOpen}>
               <ListItemAvatar>
               </ListItemAvatar>
               <ListItemText  primary={`Line item ${props.info.nameType + 1}`} />
             </ListItemButton>
+            <PhaseModal open={open} handleClose={handleClose}/>
         </ListItem>
     );
 }
