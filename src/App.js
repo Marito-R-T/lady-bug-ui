@@ -10,7 +10,7 @@ import { theme } from './theme/theme';
 import Layout from './theme/AppBar';
 import MainPage from './main-page/MainPage'
 import CreateUser from './users/CreateUser';
-import ProjectsList from './admin/projects-list/ProjectsList';
+import ProjectsList from './admin/ProjectsList';
 
 function App() {
   return (
