@@ -5,7 +5,6 @@ import './App.css';
 import LogIn from './log-in/LogIn';
 import CreateProject from './admin/CreateProject';
 import CreateCaseType from './admin/CreateCaseType';
-import TableDemo from './admin/TableRows';
 import UserProfile from './admin/UserProfile';
 import * as React from 'react';
 import { ThemeProvider } from '@mui/material/styles';

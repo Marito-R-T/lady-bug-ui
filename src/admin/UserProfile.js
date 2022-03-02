@@ -70,7 +70,7 @@ function UserProfile() {
                                 Full Name:
                             </Typography>
                             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                Sergio Daniel Cifuentes
+                                Jose Armando Gomez
                             </Typography>
                         </CardContent>
 

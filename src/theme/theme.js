@@ -13,6 +13,7 @@ export const theme = createTheme({
       },
       neutral: {
         main: '#e6b8aa',
+        darker: '#e8dae4',
         contrastText: '#fff',
       },
       secondary: {
@@ -22,7 +23,8 @@ export const theme = createTheme({
         //main: '#002A62'
         main: '#002A62',
         black: '#000000',
-        green: '#036666'
+        green: '#036666',
+        cleargreen: '#8ab5b5'
       },
       white: '#ffffff'
     },
