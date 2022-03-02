@@ -16,6 +16,7 @@ import Layout from './theme/AppBar';
 import MainPage from './main-page/MainPage'
 import CreateUser from './admin/CreateUser';
 import ViewProject from './admin/project-view/ViewProject'
+import ProjectsList from './admin/ProjectsList';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="create_case_type" element={<CreateCaseType />}/> 
           <Route path="add-developer" element={<CreateUser />}/>
           <Route path="project-view" element={<ViewProject />} />
+          <Route path="projects-list" element={<ProjectsList />}/>
         </Route>
 
       </Routes>

@@ -10,6 +10,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { Link } from 'react-router-dom';
+import DvrIcon from '@mui/icons-material/Dvr';
 
 export const mainListItems = (
   <React.Fragment>
@@ -25,11 +26,11 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Add Developer" />
     </ListItemButton>
-    <ListItemButton component={Link} to="project-view">
+    <ListItemButton component={Link} to="projects-list">
       <ListItemIcon>
-        <PeopleIcon />
+        <DvrIcon />
       </ListItemIcon>
-      <ListItemText primary="Project" />
+      <ListItemText primary="Projects List" />
     </ListItemButton>
     <ListItemButton component={Link} to="project-view">
       <ListItemIcon>
