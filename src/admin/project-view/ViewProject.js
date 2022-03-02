@@ -4,7 +4,8 @@ import MainInfo from './MainInfo';
 import CaseView from './CaseView';
 import Box from '@mui/material/Box';
 
-const mainFeaturedPost = {
+const project = {
+  //id: int,
   name: 'Project Example',
   description:
     "Ejemplo de Proyecto",
@@ -12,9 +13,28 @@ const mainFeaturedPost = {
   startDate: '00/00/0000',
   dueDate: '00/00/0000',
   status: 'in progress'
+  /*cases: [{
+    id: int,
+    nameType: 'Featured post',
+    startDate: 'Nov 12, 2000',
+    dueDate: 'Nov 12, 2001',
+    description: 'This is a wider card with supporting text below as a natural lead-in to additional content.',
+    status: 'inProgress',
+    phases: [{
+      id: int,
+      developer:String,
+      userid: int,
+      number:int,
+      status:String(inProgress, Finished, ToDo, Canceled),
+      startdate:Date,
+      duedate:Date
+    }],
+    actual: number
+  }]
+  */
 };
 
-const featuredPosts = [
+const Cases = [
   {
     nameType: 'Featured post',
     startDate: 'Nov 12, 2000',
@@ -22,9 +42,17 @@ const featuredPosts = [
     description:
       'This is a wider card with supporting text below as a natural lead-in to additional content.',
     status: 'inProgress',
+    /* phases: [{
+        developer:String,
+        number:int,
+        status:String(inProgress, Finished, ToDo, Canceled),
+        startdate:Date,
+        duedate:Date
+      }],
+      actual: number*/
   },
   {
-    nameType: 'Featured post',
+    nameType: 'Featured ',
     startDate: 'Nov 12, 2000',
     dueDate: 'Nov 12, 2001',
     description:
@@ -32,7 +60,7 @@ const featuredPosts = [
     status: 'Canceled',
   },
   {
-    nameType: 'Featured post',
+    nameType: 'Featur',
     startDate: 'Nov 12, 2000',
     dueDate: 'Nov 12, 2001',
     description:
@@ -55,14 +83,14 @@ export default function Blog() {
             <Box
               px={{ xs:3, sm:5 }}
               py={{ xs:3, sm:3 }}>
-            <MainInfo post={mainFeaturedPost} />
+            <MainInfo post={project} />
             </Box>
             <Box
               px={{ xs:3, sm:5 }}
-              py={{ xs:3, sm:5 }}>
+              py={{ xs:3, sm:2 }}>
               <Grid container spacing={1}>
-                {featuredPosts.map((post) => (
-                  <CaseView key={post.title} post={post} />
+                {Cases.map((post) => (
+                  <CaseView post={post} />
                 ))}
               </Grid>
             </Box>

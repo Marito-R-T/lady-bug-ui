@@ -73,10 +73,8 @@ function MainInfo(props) {
 MainInfo.propTypes = {
   post: PropTypes.shape({
     description: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    imageText: PropTypes.string.isRequired,
-    linkText: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    pmName: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
   }).isRequired,
 };
 
