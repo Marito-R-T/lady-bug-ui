@@ -51,12 +51,12 @@ function UserProfile() {
 
                 </div>
                 <Typography sx={{ topMargin: '36px',mt: 3, mb: 2 }} variant="h2" color="dark.main" component="div">
-                    Sergio Cifuentes
+                    Jose Gomez
                 </Typography>
                 <br></br>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Card color="dark" sx={{ maxWidth: 350, minWidth: 350 , maxHeight: 250, minHeight:250,marginRight: '36px'}}>
-                        <CardContent>
+                    <Card color="dark.main" sx={{ backgroundColor:'primary.clear',maxWidth: 350, minWidth: 350 , maxHeight: 250, minHeight:250,marginRight: '36px'}}>
+                        <CardContent >
                             <Typography variant="h4" sx={{ fontSize: 24 }} color="dark.main" gutterBottom>
                                 Personal Information
                             </Typography>
@@ -64,7 +64,7 @@ function UserProfile() {
                                 Email:
                             </Typography>
                             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                sergiocifuentes1485@gmail.com
+                                jgomez1995@gmail.com
                             </Typography>
                             <Typography variant="h6" component="div" color="black">
                                 Full Name:
@@ -75,7 +75,7 @@ function UserProfile() {
                         </CardContent>
 
                     </Card>
-                    <Card color="dark" sx={{ maxWidth: 350, minWidth: 350, maxHeight: 250, minHeight:250 }}>
+                    <Card color="secondary" sx={{ backgroundColor:'primary.clear',maxWidth: 350, minWidth: 350, maxHeight: 250, minHeight:250 }}>
                         <CardContent>
                             <Typography variant="h4" sx={{ fontSize: 24 }} color="dark.main" gutterBottom>
                                 Work Stats
