@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -14,13 +14,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import AddBoxIcon from "@material-ui/icons/AddBox";
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 
 const columns = [
