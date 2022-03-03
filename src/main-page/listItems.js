@@ -14,7 +14,7 @@ import DvrIcon from '@mui/icons-material/Dvr';
 
 export const mainListItems = (
   <React.Fragment>
-    <ListItemButton component={Link} to="">
+    <ListItemButton component={Link} to="profile/1">
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
@@ -37,6 +37,30 @@ export const mainListItems = (
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Project" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="phase/1">
+      <ListItemIcon>
+        <PeopleIcon />
+      </ListItemIcon>
+      <ListItemText primary="Phase" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="user_phases/1">
+      <ListItemIcon>
+        <PeopleIcon />
+      </ListItemIcon>
+      <ListItemText primary="User Phases" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="create_project">
+      <ListItemIcon>
+        <PeopleIcon />
+      </ListItemIcon>
+      <ListItemText primary="Create Project" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="create_case_type">
+      <ListItemIcon>
+        <PeopleIcon />
+      </ListItemIcon>
+      <ListItemText primary="Create Case Type" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
