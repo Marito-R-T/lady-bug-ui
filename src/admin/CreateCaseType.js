@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
