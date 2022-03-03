@@ -32,6 +32,18 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Projects List" />
     </ListItemButton>
+    <ListItemButton component={Link} to="cases-list">
+      <ListItemIcon>
+        <DvrIcon />
+      </ListItemIcon>
+      <ListItemText primary="Cases List" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="assigned-projects">
+      <ListItemIcon>
+        <DvrIcon />
+      </ListItemIcon>
+    <ListItemText primary="Assigned Projects" />
+    </ListItemButton>
     <ListItemButton component={Link} to="project-view">
       <ListItemIcon>
         <PeopleIcon />

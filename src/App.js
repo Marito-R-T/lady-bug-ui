@@ -17,6 +17,8 @@ import MainPage from './main-page/MainPage'
 import CreateUser from './admin/CreateUser';
 import ViewProject from './admin/project-view/ViewProject'
 import ProjectsList from './admin/ProjectsList';
+import AssignedProjectsList from './manager/AssignedProjectsList';
+import CasesList from './admin/CasesList';
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
           <Route path="add-developer" element={<CreateUser />}/>
           <Route path="project-view" element={<ViewProject />} />
           <Route path="projects-list" element={<ProjectsList />}/>
+          <Route path="assigned-projects" element={<AssignedProjectsList />}/>
+          <Route path="cases-list" element={<CasesList />}/>
         </Route>
 
       </Routes>
