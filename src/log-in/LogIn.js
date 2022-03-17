@@ -17,6 +17,19 @@ function GetLogo() {
 }
 
 export default function Login() {
+
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: "prueba", password: "email" })
+  };
+
+  const fetchPhase = async () => {
+    const response = await fetch('http://localhost:8080/api/login',requestOptions).then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => console.log('Success:', response));
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -25,6 +38,7 @@ export default function Login() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    fetchPhase();
   };
 
   return (
