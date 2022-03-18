@@ -4,28 +4,48 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Cookies from 'js-cookie';
+import { Link, useNavigate } from 'react-router-dom';
 
 //import logo from '/Logo.png';
 
 function GetLogo() {
-    return <img class="LogoLogin" src={process.env.PUBLIC_URL + "/Logo.png"} alt="Logo"/>
+    return (<img className='LogoLogin' src={process.env.PUBLIC_URL + "/Logo.png"} alt="Logo"/>);
 }
 
 export default function Login() {
+
+  let navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
+    /*console.log({
       email: data.get('email'),
       password: data.get('password'),
-    });
+    });*/
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: data.get('email'), password: data.get('password') })
+    };
+    Cookies.set("token", /*items['token']*/ data.get('email'), { secure: true });
+    //postLogin(requestOptions);
+    console.log(Cookies.get("token"));
+    navigate("/profile/e");
   };
+
+  const postLogin = async (requestOptions) => {
+      const data = await fetch('https://api.imgflip.com/get_memes',requestOptions);
+      const items = await data.json();
+      //Auth.setAuth(false);
+      Cookies.set("token", /*items['token']*/ true);
+      return <Link to='/profile/3'/>;
+  }
 
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -39,7 +59,7 @@ export default function Login() {
               alignItems: 'center'
             }}
           >
-            <GetLogo></GetLogo>
+            <GetLogo/>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
@@ -80,16 +100,6 @@ export default function Login() {
                 </Typography>
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
               </Grid>
             </Box>
           </Box>
