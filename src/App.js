@@ -3,9 +3,13 @@ import * as React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { theme } from './theme/theme';
-import RoutesProtected from './Routes';
-import AuthApi from './AuthApi';
-import Cookies from 'js-cookie';
+import Layout from './theme/AppBar';
+import MainPage from './main-page/MainPage'
+import CreateUser from './admin/CreateUser';
+import ViewProject from './admin/project-view/ViewProject'
+import ProjectsList from './admin/ProjectsList';
+import AssignedProjectsList from './manager/AssignedProjectsList';
+import CasesList from './admin/CasesList';
 
 function App() {
 
@@ -24,7 +28,26 @@ function App() {
     <div className="App">
     <ThemeProvider theme={theme}>
       <CssBaseline />
-        <RoutesProtected/>
+      <Routes>
+      
+        <Route path="/" element={<Layout />} >
+           
+          <Route path="login" element={<LogIn />}/>
+        </Route>
+        <Route path="/" element={<MainPage />}>
+          <Route path="profile/:id" element={<UserProfile/>}/> 
+          <Route path="phase/:id" element={<Phase/>}/> 
+          <Route path="user_phases/:id" element={<UserPhases/>}/> 
+          <Route path="create_project" element={<CreateProject />}/> 
+          <Route path="create_case_type" element={<CreateCaseType />}/> 
+          <Route path="add-developer" element={<CreateUser />}/>
+          <Route path="project-view" element={<ViewProject />} />
+          <Route path="projects-list" element={<ProjectsList />}/>
+          <Route path="assigned-projects" element={<AssignedProjectsList />}/>
+          <Route path="cases-list" element={<CasesList />}/>
+        </Route>
+
+      </Routes>
     </ThemeProvider>
     </div>
   );

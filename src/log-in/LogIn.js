@@ -19,24 +19,27 @@ function GetLogo() {
 
 export default function Login() {
 
-  let navigate = useNavigate();
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: "prueba", password: "email" })
+  };
+
+  const fetchPhase = async () => {
+    await fetch('http://localhost:8080/api/login',requestOptions).then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => console.log('Success:', response));
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    /*console.log({
+    console.log({
       email: data.get('email'),
       password: data.get('password'),
-    });*/
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: data.get('email'), password: data.get('password') })
-    };
-    Cookies.set("token", /*items['token']*/ data.get('email'), { secure: true });
-    //postLogin(requestOptions);
-    console.log(Cookies.get("token"));
-    navigate("/profile/e");
+    });
+    fetchPhase();
   };
 
   const postLogin = async (requestOptions) => {
