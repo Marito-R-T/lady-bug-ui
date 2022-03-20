@@ -14,7 +14,8 @@ import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import Avatar from '@mui/material/Avatar';
 import MuiDrawer from '@mui/material/Drawer';
-import { mainListItems, secondaryListItems } from './listItems';
+import MainListItems from './listItems';
+import { secondaryListItems } from './listItems';
 
 
 const drawerWidth = 240;
@@ -122,7 +123,7 @@ function MainPage() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            <MainListItems/>
             <Divider sx={{ my: 1 }} />
             {secondaryListItems}
           </List>

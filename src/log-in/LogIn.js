@@ -9,25 +9,29 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { useNavigate } from 'react-router-dom';
 
 //import logo from '/Logo.png';
 
 function GetLogo() {
-    return <img class="LogoLogin" src={process.env.PUBLIC_URL + "/Logo.png"} alt="Logo"/>
+    return <img className="LogoLogin" src={process.env.PUBLIC_URL + "/Logo.png"} alt="Logo"/>
 }
 
 export default function Login() {
+  let navigate = useNavigate();
 
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+    referrerPolicy: 'origin-when-cross-origin',
     body: JSON.stringify({ email: "prueba", password: "email" })
   };
 
   const fetchPhase = async () => {
-    const response = await fetch('http://localhost:8080/api/login',requestOptions).then(res => res.json())
+    const response = await fetch('https://ladybugger.herokuapp.com/api/auth/sign-in',requestOptions).then(res => res.json())
     .catch(error => console.error('Error:', error))
     .then(response => console.log('Success:', response));
+    navigate("/profile/"+response.id, { replace: true });
   }
 
   const handleSubmit = (event) => {
