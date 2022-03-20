@@ -10,17 +10,25 @@ import ViewProject from './admin/project-view/ViewProject'
 import ProjectsList from './admin/ProjectsList';
 import AssignedProjectsList from './manager/AssignedProjectsList';
 import CasesList from './admin/CasesList';
+import Phase from './admin/Phase';
+import Login from './log-in/LogIn';
+import UserProfile from './admin/UserProfile';
+import UserPhases from './admin/UserPhases';
+import CreateProject from './admin/CreateProject';
+import CreateCaseType from './admin/CreateCaseType';
+
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
 
-  const [auth, setAuth] = React.useState(false);
+  // const [auth, setAuth] = React.useState(false);
 
-  const readCookie = () => {
-    const token = Cookies.get('token');
-    if(token) {
-      setAuth(true);
-    }
-  }
+  // const readCookie = () => {
+  //   const token = Cookies.get('token');
+  //   if(token) {
+  //     setAuth(true);
+  //   }
+  // }
   /*React.useEffect(() => {
     readCookie();
   }, []);*/
@@ -32,7 +40,7 @@ function App() {
       
         <Route path="/" element={<Layout />} >
            
-          <Route path="login" element={<LogIn />}/>
+          <Route path="login" element={<Login />}/>
         </Route>
         <Route path="/" element={<MainPage />}>
           <Route path="profile/:id" element={<UserProfile/>}/> 
