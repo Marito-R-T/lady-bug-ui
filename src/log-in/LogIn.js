@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 //import logo from '/Logo.png';
 
@@ -22,16 +23,18 @@ export default function Login() {
 
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    referrerPolicy: 'origin-when-cross-origin',
-    body: JSON.stringify({ email: "prueba", password: "email" })
+    headers: { 'Content-Type': 'application/json', 'Acces-Control-Allow-Origin': '*' },
+    body: JSON.stringify({ email: "email", password: "12345" })
   };
 
   const fetchPhase = async () => {
-    const response = await fetch('https://ladybugger.herokuapp.com/api/auth/sign-in',requestOptions).then(res => res.json())
+    await fetch('https://ladybugger.herokuapp.com/api/auth/sign-in',requestOptions).then(res => res.json())
     .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));
-    navigate("/profile/"+response.id, { replace: true });
+    .then(response => {
+      console.log('Success:', response)
+      Cookies.set('token', response.accessToken, { secure: true });
+      navigate("/profile/"+response.id, { replace: true });
+    });
   }
 
   const handleSubmit = (event) => {
