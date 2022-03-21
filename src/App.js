@@ -4,9 +4,6 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { theme } from './theme/theme';
 import RoutesClass from './routes/routes';
-import { 
-  BrowserRouter
-} from 'react-router-dom';
 
 function App() {
   return (

@@ -4,18 +4,17 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 //import logo from '/Logo.png';
 
 function GetLogo() {
-    return <img className="LogoLogin" src={process.env.PUBLIC_URL + "/Logo.png"} alt="Logo"/>
+    return (<img className='LogoLogin' src={process.env.PUBLIC_URL + "/Logo.png"} alt="Logo"/>);
 }
 
 export default function Login() {
@@ -60,7 +59,7 @@ export default function Login() {
               alignItems: 'center'
             }}
           >
-            <GetLogo></GetLogo>
+            <GetLogo/>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
@@ -101,16 +100,6 @@ export default function Login() {
                 </Typography>
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
               </Grid>
             </Box>
           </Box>

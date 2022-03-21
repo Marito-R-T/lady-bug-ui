@@ -4,11 +4,8 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import LogoutIcon from '@mui/icons-material/Logout';
 import { Outlet } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import Badge from '@mui/material/Badge';
-import { Link } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
@@ -16,6 +13,7 @@ import Avatar from '@mui/material/Avatar';
 import MuiDrawer from '@mui/material/Drawer';
 import MainListItems from './listItems';
 import { secondaryListItems } from './listItems';
+import Logout from './Logout';
 
 
 const drawerWidth = 240;
@@ -99,13 +97,7 @@ function MainPage() {
             >
               
             </Typography>
-            <IconButton color="dark" component={Link} to="/">
-              <Typography color="dark.main">
-                <Badge badgeContent='Logout' color="primary">
-                  <LogoutIcon />
-                </Badge>
-              </Typography>
-            </IconButton>
+            <Logout/>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" color="neutral.main" open={open}>
