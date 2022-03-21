@@ -3,7 +3,7 @@ import '../App.css';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { useParams } from 'react-router-dom'
-
+import Cookies from 'js-cookie';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -15,18 +15,24 @@ import Typography from '@mui/material/Typography';
 function UserProfile() {
     //const [user, setUser] = React.useState(null)
     const { id } = useParams();
+    const [user, setUser] = React.useState();
+
+
     useEffect(() => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Acces-Control-Allow-Origin': '*' },
+            body: JSON.stringify({ id: id, token: Cookies.get('token') })
+          };
+        const fetchUser = async () => {
+            console.log(Cookies.get('token'))
+            console.log(requestOptions)
+            const response = await fetch('https://ladybugger.herokuapp.com/profile/' + id, requestOptions);
+            setUser(response);
+        }
         fetchUser();
     }, []);
 
-
-    const fetchUser = async () => {
-        const data = await fetch('https://api.imgflip.com/get_memes');
-        const items = await data.json();
-        console.log(items)
-        console.log(id)
-        //setUser(items);
-    }
 
     return (
         <div>

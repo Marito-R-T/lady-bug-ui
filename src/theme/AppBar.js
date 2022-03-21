@@ -60,7 +60,7 @@ function Layout() {
             >
               
             </Typography>
-            <IconButton color="dark" component={Link} to="/profile/1">
+            <IconButton color="dark" component={Link} to="/profile/1" >
                   <LoginIcon />
             </IconButton>
             <IconButton color="dark" component={Link} to="/login">

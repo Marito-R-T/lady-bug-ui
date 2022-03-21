@@ -4,19 +4,38 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 //import logo from '/Logo.png';
 
 function GetLogo() {
-    return <img class="LogoLogin" src={process.env.PUBLIC_URL + "/Logo.png"} alt="Logo"/>
+    return (<img className='LogoLogin' src={process.env.PUBLIC_URL + "/Logo.png"} alt="Logo"/>);
 }
 
 export default function Login() {
+  let navigate = useNavigate();
+
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Acces-Control-Allow-Origin': '*' },
+    body: JSON.stringify({ email: "email", password: "12345" })
+  };
+
+  const fetchPhase = async () => {
+    await fetch('https://ladybugger.herokuapp.com/api/auth/sign-in',requestOptions).then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => {
+      console.log('Success:', response)
+      Cookies.set('token', response.accessToken, { secure: true });
+      navigate("/profile/"+response.id, { replace: true });
+    });
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -25,6 +44,7 @@ export default function Login() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    fetchPhase();
   };
 
   return (
@@ -39,7 +59,7 @@ export default function Login() {
               alignItems: 'center'
             }}
           >
-            <GetLogo></GetLogo>
+            <GetLogo/>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
@@ -80,16 +100,6 @@ export default function Login() {
                 </Typography>
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
               </Grid>
             </Box>
           </Box>
