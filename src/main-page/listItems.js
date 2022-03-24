@@ -5,7 +5,6 @@ import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
-import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -13,77 +12,80 @@ import { Link } from 'react-router-dom';
 import DvrIcon from '@mui/icons-material/Dvr';
 
 export default function MainListItems() {
-  const [admin, setAdmin] = React.useState(false);
+  const [admin, setAdmin] = React.useState(true);
+  const [pm, setPm] = React.useState(true);
+  const [developer, setDeveloper] = React.useState(true);
+
   return (
     <React.Fragment>
+      <ListItemButton component={Link} to="profile/1">
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary="Dashboard" />
+      </ListItemButton>
       {admin && <div>
-        <ListItemButton component={Link} to="profile/1">
+        <ListItemButton component={Link} to="add-developer">
           <ListItemIcon>
-            <DashboardIcon />
+            <Avatar src={process.env.PUBLIC_URL + "/ant.png"}/>
           </ListItemIcon>
-          <ListItemText primary="Dashboard" />
-      </ListItemButton>
-      <ListItemButton component={Link} to="add-developer">
-        <ListItemIcon>
-          <Avatar src={process.env.PUBLIC_URL + "/ant.png"}/>
-        </ListItemIcon>
-        <ListItemText primary="Add Developer" />
-      </ListItemButton>
-      <ListItemButton component={Link} to="projects-list">
-        <ListItemIcon>
-          <DvrIcon />
-        </ListItemIcon>
-        <ListItemText primary="Projects List" />
-      </ListItemButton>
+          <ListItemText primary="Add Developer" />
+        </ListItemButton>
+        <ListItemButton component={Link} to="projects-list">
+          <ListItemIcon>
+            <DvrIcon />
+          </ListItemIcon>
+          <ListItemText primary="Projects List" />
+        </ListItemButton>
+        <ListItemButton component={Link} to="assigned-projects">
+          <ListItemIcon>
+            <DvrIcon />
+          </ListItemIcon>
+          <ListItemText primary="Assigned Projects" />
+        </ListItemButton>
+        <ListItemButton component={Link} to="create_project">
+          <ListItemIcon>
+            <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Create Project" />
+        </ListItemButton>
+        <ListItemButton component={Link} to="create_case_type">
+          <ListItemIcon>
+            <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Create Case Type" />
+        </ListItemButton>
       </div>}
-      <ListItemButton component={Link} to="cases-list">
-        <ListItemIcon>
-          <DvrIcon />
-        </ListItemIcon>
-        <ListItemText primary="Cases List" />
-      </ListItemButton>
-      <ListItemButton component={Link} to="assigned-projects">
-        <ListItemIcon>
-          <DvrIcon />
-        </ListItemIcon>
-      <ListItemText primary="Assigned Projects" />
-      </ListItemButton>
-      <ListItemButton component={Link} to="project-view">
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Project" />
-      </ListItemButton>
-      <ListItemButton component={Link} to="phase/1">
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Phase" />
-      </ListItemButton>
-      <ListItemButton component={Link} to="user_phases/1">
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="User Phases" />
-      </ListItemButton>
-      <ListItemButton component={Link} to="create_project">
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Create Project" />
-      </ListItemButton>
-      <ListItemButton component={Link} to="create_case_type">
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Create Case Type" />
-      </ListItemButton>
-      <ListItemButton>
-        <ListItemIcon>
-          <LayersIcon />
-        </ListItemIcon>
-        <ListItemText primary="Integrations" />
-      </ListItemButton>
+      {(admin || pm) && <div>
+        <ListItemButton component={Link} to="project-view">
+          <ListItemIcon>
+            <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Project" />
+        </ListItemButton>
+        <ListItemButton component={Link} to="user_phases/1">
+          <ListItemIcon>
+            <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText primary="User Phases" />
+        </ListItemButton>
+      </div>}
+      {(pm) && <div>
+      </div>}
+      {developer && <div>
+        <ListItemButton component={Link} to="cases-list">
+          <ListItemIcon>
+            <DvrIcon />
+          </ListItemIcon>
+          <ListItemText primary="Cases List" />
+        </ListItemButton>
+        <ListItemButton component={Link} to="phase/1">
+          <ListItemIcon>
+            <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Phase" />
+        </ListItemButton>
+      </div>}
     </React.Fragment>
   );
 }
