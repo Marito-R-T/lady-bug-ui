@@ -16,7 +16,7 @@ import Cookies from 'js-cookie';
 export default function SignUp() {
   let navigate = useNavigate();
   
-  const fetchPhase = async (/*firstName*/fN, /*middleName*/mN, /*lastName*/lN, /*email*/e, /*password*/p, /*roles*/r) => {
+  const fetchLogin = async (/*firstName*/fN, /*middleName*/mN, /*lastName*/lN, /*email*/e, /*password*/p, /*roles*/r) => {
     const auth = (Cookies.get('tokenType') + ' ' + Cookies.get('token'));
     const requestOptions = {
       method: 'POST',
@@ -43,7 +43,7 @@ export default function SignUp() {
     if(data.get('isAdmin')){
       roles.push("admin")
     }
-    fetchPhase(data.get('firstName'), data.get('middleName'), data.get('lastName'), data.get('email'), data.get('password'), roles);
+    fetchLogin(data.get('firstName'), data.get('middleName'), data.get('lastName'), data.get('email'), data.get('password'), roles);
   };
 
   return (
