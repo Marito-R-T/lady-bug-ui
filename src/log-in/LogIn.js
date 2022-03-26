@@ -20,18 +20,18 @@ function GetLogo() {
 export default function Login() {
   let navigate = useNavigate();
 
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Acces-Control-Allow-Origin': '*' },
-    body: JSON.stringify({ email: "email", password: "12345" })
-  };
-
-  const fetchPhase = async () => {
+  const fetchPhase = async (/*email*/e, /*password*/p) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Acces-Control-Allow-Origin': '*' },
+      body: JSON.stringify({ email: e, password: p })
+    };
     await fetch('https://ladybugger.herokuapp.com/api/auth/sign-in',requestOptions).then(res => res.json())
     .catch(error => console.error('Error:', error))
     .then(response => {
       console.log('Success:', response)
       Cookies.set('token', response.accessToken, { secure: true });
+      Cookies.set('tokenType', response.tokenType, {secure: true});
       navigate("/profile/"+response.id, { replace: true });
     });
   }
@@ -44,7 +44,7 @@ export default function Login() {
       email: data.get('email'),
       password: data.get('password'),
     });
-    fetchPhase();
+    fetchPhase(data.get('email'), data.get('password'));
   };
 
   return (
