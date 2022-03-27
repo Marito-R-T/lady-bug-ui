@@ -73,13 +73,11 @@ function MainInfo(props) {
                 </Typography>
             </Button>
             <Typography variant="body1" sx={{ columns: 1, columnSpacing: 5 }}>
-                <Typography color="dark.black" variant="body1">
-                    <b>start date:</b>  
-                    {"  "+post.startDate}
-                    <b style={{ color:'#036666' }}>. . . . . . . . . . .</b>
-                    <b>due date:</b>
-                    {"  "+post.dueDate}
-                </Typography>
+                <b>start date:</b>  
+                {"  "+post.startDate}
+                <b style={{ color:'#036666' }}>. . . . . . . . . . .</b>
+                <b>due date:</b>
+                {"  "+post.dueDate}
             </Typography>
           </Box>
         </Grid>

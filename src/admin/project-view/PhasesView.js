@@ -40,8 +40,7 @@ export default function PhasesView(props) {
       <Collapse in={openc} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {props.completed.map((value) => {
-            i++;
-            return(<Phase info={value} i={i}/>);
+            return(<Phase info={value} key={value.id}/>);
           })}
         </List>
       </Collapse>
@@ -56,8 +55,7 @@ export default function PhasesView(props) {
         <List component="div" disablePadding>
           { 
           props.toDo.map((value) => {
-            i++;
-            return(<Phase info={value} i={i}/>);
+            return(<Phase info={value} key={value.id}/>);
           })}
         </List>
       </Collapse>
