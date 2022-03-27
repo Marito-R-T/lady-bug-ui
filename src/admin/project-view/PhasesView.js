@@ -41,7 +41,7 @@ export default function PhasesView(props) {
         <List component="div" disablePadding>
           {props.completed.map((value) => {
             i++;
-            return(<Phase info={value} i={i}/>);
+            return(<Phase info={value} key={i}/>);
           })}
         </List>
       </Collapse>
@@ -57,7 +57,7 @@ export default function PhasesView(props) {
           { 
           props.toDo.map((value) => {
             i++;
-            return(<Phase info={value} i={i}/>);
+            return(<Phase info={value} key={i}/>);
           })}
         </List>
       </Collapse>

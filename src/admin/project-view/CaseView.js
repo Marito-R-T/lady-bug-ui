@@ -85,7 +85,7 @@ function CaseView(props) {
   return (
     <Grid item xs={12} md={12} sx={{ py:5 }} >
     <Card sx={{ backgroundColor:'primary.clear', columnCount:1 }}>
-        <CardActionArea component="Link" href="/profile">
+        <CardActionArea>
             <CardContent>
                 <Typography component="h2" variant="h5" color="dark.main">
                 {post.nameType}
@@ -102,7 +102,7 @@ function CaseView(props) {
                 <Typography variant="subtitle1" color="primary">
                 {post.status}
                 </Typography>
-                <StepCase/>
+                <StepCase i={props.i}/>
             </CardContent>
         </CardActionArea>
             {(post.status !== "Canceled" && post.status !== "Finished") ? 

@@ -89,9 +89,9 @@ export default function Blog() {
               px={{ xs:3, sm:5 }}
               py={{ xs:3, sm:2 }}>
               <Grid container spacing={1}>
-                {Cases.map((post) => (
-                  <CaseView post={post} />
-                ))}
+                {Cases.map((post, index) => {
+                  return <CaseView post={post} key={index} i={index}/>
+                })}
               </Grid>
             </Box>
         </main>

@@ -82,17 +82,19 @@ ColorlibStepIcon.propTypes = {
 };
 
 const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad',
- 'hola', 'hola', 'hola', 'hola', 'hola', 'hola', 'hola','hola', 'hola', 'hola','hola'];
+ 'hola'];
 
-export default function StepCase() {
+export default function StepCase(props) {
   return (
     <Stack sx={{ width: '100%' }} spacing={4}>
       <Stepper alternativeLabel activeStep={5} connector={<ColorlibConnector />}>
-        {steps.map((label) => (
-          <Step>
-            <StepLabel StepIconComponent={ColorlibStepIcon}></StepLabel>
-          </Step>
-        ))}
+        {steps.map((label, index) => {
+          const id = index + "" + props.i;
+          console.log(id);
+          return (<Step>
+            <StepLabel StepIconComponent={ColorlibStepIcon} key={index}></StepLabel>
+          </Step>);
+        })}
       </Stepper>
     </Stack>
   );
