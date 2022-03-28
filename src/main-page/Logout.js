@@ -6,11 +6,13 @@ import {
 } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 export default function Logout() {
     const onLogout = () => {
-        //Auth.setAuth(false);
-        //Cookies.remove("token");
+      Cookies.remove('token');
+      Cookies.remove('tokenType');
+      //Auth.setAuth(false);
     }
 
     return(
