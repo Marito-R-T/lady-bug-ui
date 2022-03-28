@@ -34,8 +34,9 @@ const project = {
   */
 };
 
-const Cases = [
+const cases = [
   {
+    id: 1,
     nameType: 'Featured post',
     startDate: 'Nov 12, 2000',
     dueDate: 'Nov 12, 2001',
@@ -52,6 +53,7 @@ const Cases = [
       actual: number*/
   },
   {
+    id: 2,
     nameType: 'Featured ',
     startDate: 'Nov 12, 2000',
     dueDate: 'Nov 12, 2001',
@@ -60,6 +62,7 @@ const Cases = [
     status: 'Canceled',
   },
   {
+    id: 3,
     nameType: 'Featur',
     startDate: 'Nov 12, 2000',
     dueDate: 'Nov 12, 2001',
@@ -89,9 +92,9 @@ export default function Blog() {
               px={{ xs:3, sm:5 }}
               py={{ xs:3, sm:2 }}>
               <Grid container spacing={1}>
-                {Cases.map((post, index) => {
-                  return <CaseView post={post} key={index} i={index}/>
-                })}
+                {cases.map((value) => (
+                  <CaseView post={value} key={value.id} />
+                ))}
               </Grid>
             </Box>
         </main>

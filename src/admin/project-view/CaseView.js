@@ -23,6 +23,7 @@ const actual = {
 
 const completed = [
     {
+      id: 1,
       nameType: 'F',
       startDate: 'Nov 12, 2000',
       dueDate: 'Nov 12, 2001',
@@ -31,6 +32,7 @@ const completed = [
       status: 'inProgress',
     },
     {
+      id: 2,
       nameType: 'G',
       startDate: 'Nov 12, 2000',
       dueDate: 'Nov 12, 2001',
@@ -39,6 +41,7 @@ const completed = [
       status: 'Canceled',
     },
     {
+      id: 3,
       nameType: 'H',
       startDate: 'Nov 12, 2000',
       dueDate: 'Nov 12, 2001',
@@ -50,6 +53,7 @@ const completed = [
 
 const toDo = [
     {
+      id: 1,
       nameType: 'K',
       startDate: 'Nov 12, 2000',
       dueDate: 'Nov 12, 2001',
@@ -58,6 +62,7 @@ const toDo = [
       status: 'Canceled',
     },
     {
+      id: 2,
       nameType: 'L',
       startDate: 'Nov 12, 2000',
       dueDate: 'Nov 12, 2001',
@@ -102,7 +107,7 @@ function CaseView(props) {
                 <Typography variant="subtitle1" color="primary">
                 {post.status}
                 </Typography>
-                <StepCase i={props.i}/>
+                <StepCase name={post.id}/>
             </CardContent>
         </CardActionArea>
             {(post.status !== "Canceled" && post.status !== "Finished") ? 
@@ -126,7 +131,7 @@ function CaseView(props) {
                   </Button>
                 </Popover>
               </div> : 
-              <div/>
+              null
             }    
         <PhasesView actual={actual} toDo={toDo} completed={completed}/>
         </Card>

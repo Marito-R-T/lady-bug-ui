@@ -72,12 +72,12 @@ function MainInfo(props) {
                     {post.pmName}
                 </Typography>
             </Button>
-            <Typography variant="body1" sx={{ columns: 1, columnSpacing: 5 }} color="dark.black">
-                    <b>start date:</b>  
-                    {"  "+post.startDate}
-                    <b style={{ color:'#036666' }}>. . . . . . . . . . .</b>
-                    <b>due date:</b>
-                    {"  "+post.dueDate}
+            <Typography variant="body1" sx={{ columns: 1, columnSpacing: 5 }}>
+                <b>start date:</b>  
+                {"  "+post.startDate}
+                <b style={{ color:'#036666' }}>. . . . . . . . . . .</b>
+                <b>due date:</b>
+                {"  "+post.dueDate}
             </Typography>
           </Box>
         </Grid>

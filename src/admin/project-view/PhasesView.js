@@ -20,7 +20,6 @@ export default function PhasesView(props) {
   const clickToDo = () => {
     setOpent(!opent);
   };
-  var i = 0;
 
   return (
     <List
@@ -40,8 +39,7 @@ export default function PhasesView(props) {
       <Collapse in={openc} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {props.completed.map((value) => {
-            i++;
-            return(<Phase info={value} key={i}/>);
+            return(<Phase info={value} key={value.id}/>);
           })}
         </List>
       </Collapse>
@@ -56,8 +54,7 @@ export default function PhasesView(props) {
         <List component="div" disablePadding>
           { 
           props.toDo.map((value) => {
-            i++;
-            return(<Phase info={value} key={i}/>);
+            return(<Phase info={value} key={value.id}/>);
           })}
         </List>
       </Collapse>
