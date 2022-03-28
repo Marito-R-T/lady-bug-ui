@@ -14,40 +14,56 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDateRangePicker from '@mui/lab/DesktopDateRangePicker';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import axios from 'axios';
 
-function CreateProject() {
+const CreateProject = () => {
     let navigate = useNavigate();
-    const [value, setValue] = React.useState([null, null]);
+    const [value, setValue] = useState([]);
 
     useEffect(() => {
         fetchItems();
     }, []);
 
     const fetchProject = async (/*Name*/name, /*description*/desc, /*pm ID*/pmId, /*start Date*/sd, /*due Date*/dd) => {
-        const auth = (Cookies.get('tokenType') + ' ' + Cookies.get('token'));
-        const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Acces-Control-Allow-Origin': '*', 'Authorization': auth},
-        body: JSON.stringify({
-            "name": name,
-            "description": desc,
-            "pmId": 4,
-            "startDate": sd,
-            "dueDate": dd
-          })
-        };
-        await fetch('https://ladybugger.herokuapp.com/admin/create-project',requestOptions).then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then(response => {
-        console.log('Success:', response)
-        navigate("#");
-        });
+        const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
+        try {
+            const response = await axios.post('https://ladybugger.herokuapp.com/admin/create-project', 
+                {
+                    name: name,
+                    description: desc,
+                    pmId: 4,
+                    startDate: sd,
+                    dueDate: dd
+                }, 
+                {
+                    headers: {
+                        'Authorization': auth
+                    }
+                }
+            );  
+            console.log('Success:', response.data);  
+            navigate('#');
+        } catch(error) {
+            console.error('Error:', error);
+        }
     }
 
     const [items, setItems] = useState([]);
 
     const fetchItems = async () => {
-        const requestOptions = {
+        const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
+        const response = await axios.get('https://ladybugger.herokuapp.com/admin/devs-list', 
+            {
+                headers: {
+                    'Authorization': auth
+                }
+            }
+        );
+       
+        console.log(response.data)
+        // setItems(reponse.data);
+        
+      const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json', 'Acces-Control-Allow-Origin': '*' }
         };

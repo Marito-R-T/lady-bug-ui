@@ -10,8 +10,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
-
-//import logo from '/Logo.png';
+import axios from 'axios';
 
 function GetLogo() {
     return (<img className='LogoLogin' src={process.env.PUBLIC_URL + "/Logo.png"} alt="Logo"/>);
@@ -21,29 +20,25 @@ export default function Login() {
   let navigate = useNavigate();
 
   const fetchPhase = async (/*email*/e, /*password*/p) => {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Acces-Control-Allow-Origin': '*' },
-      body: JSON.stringify({ email: e, password: p })
-    };
-    await fetch('https://ladybugger.herokuapp.com/api/auth/sign-in',requestOptions).then(res => res.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => {
-      console.log('Success:', response)
-      Cookies.set('token', response.accessToken, { secure: true });
-      Cookies.set('tokenType', response.tokenType, {secure: true});
-      navigate("/profile/"+response.id, { replace: true });
-    });
+    try {
+      const response = await axios.post('https://ladybugger.herokuapp.com/api/auth/sign-in', 
+        {
+          email: e, 
+          password: p
+        }
+      );
+      console.log('Success:', response.data)
+      Cookies.set('token', response.data.accessToken, { secure: true });
+      Cookies.set('tokenType', response.data.tokenType, {secure: true});
+      navigate("/profile/"+response.data.id, { replace: true });
+    } catch(error) {
+      console.error(error);
+    }   
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
     fetchPhase(data.get('email'), data.get('password'));
   };
 
