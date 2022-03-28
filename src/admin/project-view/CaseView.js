@@ -107,7 +107,7 @@ function CaseView(props) {
                 <Typography variant="subtitle1" color="primary">
                 {post.status}
                 </Typography>
-                <StepCase name={post.id} />
+                <StepCase name={post.id}/>
             </CardContent>
         </CardActionArea>
             {(post.status !== "Canceled" && post.status !== "Finished") ? 
