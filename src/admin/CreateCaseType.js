@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-
+import Cookies from 'js-cookie';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -21,6 +21,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import axios from 'axios';
 
 
 const columns = [
@@ -40,51 +41,64 @@ const columns = [
 
 
 function CreateCaseType() {
-    useEffect(() => {
-
-    }, []);
     const [rows, setRows] = useState([
         { id: 1, name: "First Phase" },
     ]);
-    const [isAdd, setAdd] = React.useState(false);
-    const [showConfirm, setShowConfirm] = React.useState(false);
-    const [showAdd, setShowAdd] = React.useState(false);
-    const valueRef = useRef('')
+    const [isAdd, setAdd] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [showAdd, setShowAdd] = useState(false);
+    const valueRef = useRef('');
+
+    const postNewCaseType = async (name, description, phases) => {
+        const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
+        try {
+            const response = await axios.post('https://ladybugger.herokuapp.com/admin/create-casetype', 
+              {
+                name: name, 
+                description: description,
+                phases: phases
+              },
+              {
+                headers: {
+                    'Authorization': auth
+                }
+              }
+            );
+            console.log('Success:', response.data)
+            // navigate("/profile/"+response.data.id, { replace: true });
+          } catch(error) {
+            console.error(error);
+          }   
+    }
+
     const handleConfirm = () => {
         setShowConfirm(true);
 
     };
 
-
     const handleAdd = () => {
         console.log(isAdd);
         setAdd(true);
-        // setRows([
-        //     ...rows,
-        //     {
-        //         id: rows.length + 1, name: ""
-        //     },
-        // ]);
+     
         console.log(isAdd);
     };
+    
     const handleNo = () => {
         setShowConfirm(false);
     };
+    
     const setAddNo = () => {
         setShowAdd(false);
         console.log(showAdd)
     };
 
     const handleRemoveClick = (i) => {
-        console.log(i)
-        console.log(rows)
         const list = [...rows];
-        console.log(list)
         list.splice(i, 1);
-        console.log(list)
         setRows(list);
         setShowConfirm(false);
     };
+    
     const confirmAdd = () => {
         setRows([
             ...rows,
@@ -95,7 +109,11 @@ function CreateCaseType() {
         setAdd(false)
     };
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        postNewCaseType('test', 'static_testing', rows.map((row) => row.name));
 
+    }
 
 
 
@@ -108,6 +126,7 @@ function CreateCaseType() {
 
             <Box
                 component="form"
+                onSubmit={handleSubmit}
                 sx={{
                     marginTop: 10,
                     '& .MuiTextField-root': { m: 1, width: '65%' },
@@ -121,9 +140,9 @@ function CreateCaseType() {
                         style={{ width: '20%' }}
                         size="small"
                         required
-                        id="standard-required"
+                        id='name'
+                        name='name'
                         label="Case Type Name"
-
                         variant="standard"
                     />
                     <br></br>
@@ -135,10 +154,10 @@ function CreateCaseType() {
                         <TextField
                             fullWidth
                             required
-                            id="standard-multiline-static"
-                            label="Case Type Discription"
+                            id="description"
+                            name='description'
+                            label="Case Type Description"
                             multiline
-
                             rows={4}
 
                         />
@@ -300,8 +319,8 @@ function CreateCaseType() {
                     </Grid>
                     <br></br>
                     <Button
-                        type="submit"
-
+                        type="button"
+                        onClick={() => console.log('click')}
                         variant="contained"
                         sx={{ marginRight: '36px', mt: 3, mb: 2 }}
                         color="secondary"

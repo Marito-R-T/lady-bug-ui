@@ -16,7 +16,7 @@ import getDevs from '../hooks/GetDevList';
 import PostProject from '../hooks/admin/PostCreateProject';
 import { useNavigate } from 'react-router-dom';
 
-function CreateProject() {
+const CreateProject = () => {
     let navigate = useNavigate();
     const [value, setValue] = React.useState([null, null]);
     const [items, setItems] = useState([]);

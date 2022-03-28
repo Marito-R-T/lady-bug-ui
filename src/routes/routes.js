@@ -16,7 +16,7 @@ import MainPage from '../main-page/MainPage';
 import ViewProject from '../admin/project-view/ViewProject';
 import AssignedProjectsList from '../manager/AssignedProjectsList';
 
-export default function RoutesClass() {
+const RoutesClass = () => {
     return (
         <Routes>
           <Route path="/" element={<Layout />} >
@@ -37,3 +37,5 @@ export default function RoutesClass() {
         </Routes>
     );
 }
+
+export default RoutesClass;

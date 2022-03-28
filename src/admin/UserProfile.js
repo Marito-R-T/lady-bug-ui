@@ -19,18 +19,18 @@ function UserProfile() {
 
 
     useEffect(() => {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Acces-Control-Allow-Origin': '*' },
-            body: JSON.stringify({ id: id, token: Cookies.get('token') })
-          };
-        const fetchUser = async () => {
-            console.log(Cookies.get('token'))
-            console.log(requestOptions)
-            const response = await fetch('https://ladybugger.herokuapp.com/profile/' + id, requestOptions);
-            setUser(response);
-        }
-        fetchUser();
+        // const requestOptions = {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json', 'Acces-Control-Allow-Origin': '*' },
+        //     body: JSON.stringify({ id: id, token: Cookies.get('token') })
+        //   };
+        // const fetchUser = async () => {
+        //     console.log(Cookies.get('token'))
+        //     console.log(requestOptions)
+        //     const response = await fetch('https://ladybugger.herokuapp.com/profile/' + id, requestOptions);
+        //     setUser(response);
+        // }
+        // fetchUser();
     }, []);
 
 
