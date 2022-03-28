@@ -1,9 +1,9 @@
-export default getDevs = async (setItems) => {
+export default function getDevs(setItems) {
     const requestOptions = {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'Acces-Control-Allow-Origin': '*' }
     };
-    await fetch('https://ladybugger.herokuapp.com/admin/devs-list', requestOptions).then(res => res.json())
+    fetch('https://ladybugger.herokuapp.com/admin/devs-list', requestOptions).then(res => res.json())
     .then(response => {
         console.log(response);
         var list = [];

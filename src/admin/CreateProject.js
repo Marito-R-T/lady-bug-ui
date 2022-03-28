@@ -12,92 +12,30 @@ import Stack from '@mui/material/Stack';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDateRangePicker from '@mui/lab/DesktopDateRangePicker';
+import getDevs from '../hooks/GetDevList';
+import PostProject from '../hooks/admin/PostCreateProject';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
-import axios from 'axios';
 
 const CreateProject = () => {
     let navigate = useNavigate();
-    const [value, setValue] = useState([]);
-
-    useEffect(() => {
-        fetchItems();
-    }, []);
-
-    const fetchProject = async (/*Name*/name, /*description*/desc, /*pm ID*/pmId, /*start Date*/sd, /*due Date*/dd) => {
-        const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
-        try {
-            const response = await axios.post('https://ladybugger.herokuapp.com/admin/create-project', 
-                {
-                    name: name,
-                    description: desc,
-                    pmId: 4,
-                    startDate: sd,
-                    dueDate: dd
-                }, 
-                {
-                    headers: {
-                        'Authorization': auth
-                    }
-                }
-            );  
-            console.log('Success:', response.data);  
-            navigate('#');
-        } catch(error) {
-            console.error('Error:', error);
-        }
-    }
-
+    const [value, setValue] = React.useState([null, null]);
     const [items, setItems] = useState([]);
 
-    const fetchItems = async () => {
-        const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
-        const response = await axios.get('https://ladybugger.herokuapp.com/admin/devs-list', 
-            {
-                headers: {
-                    'Authorization': auth
-                }
-            }
-        );
-       
-        console.log(response.data)
-        // setItems(reponse.data);
-        
-      const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json', 'Acces-Control-Allow-Origin': '*' }
-        };
-        await fetch('https://ladybugger.herokuapp.com/admin/devs-list', requestOptions).then(res => res.json())
-        .then(response => {
-            console.log(response);
-            var list = [];
-            response.forEach(e => {
-                if(e[2] == null) {
-                    list = list.concat({ "id": e[0], "label": e[0] + ". " + e[1] + "" });
-                } else {
-                    list = list.concat({ "id": e[0], "label": e[0] + ". " + e[1] + " " + e[2] });
-                }
-            });
-            console.log(list);
-            setItems(list);
-        });
-        /*var list = []
-        items.data.memes.map(item => (
-            list = list.concat({ "id": item.id, "label": item.name })
-        ))*/
-        //console.log(items)
-    }
+    useEffect(() => {
+        getDevs(setItems);
+    }, []);
 
     const handleSubmit = (event) => {
-      event.preventDefault();
-      const data = new FormData(event.currentTarget);
-      // eslint-disable-next-line no-console
-      console.log(data.get('dueDate'));
-      var split = data.get('startDate').split('/');
-      const startDate = split[2] + "-" + split[0] + "-" + split[1];
-      split = data.get('dueDate').split('/');
-      const dueDate = split[2] + "-" + split[0] + "-" + split[1];
-      fetchProject(data.get('name'), data.get('description'), data.get('pmId'), startDate, dueDate);
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        // eslint-disable-next-line no-console
+        console.log(data.get('pmId'));
+        var split = data.get('startDate').split('/');
+        const startDate = split[2] + "-" + split[0] + "-" + split[1];
+        split = data.get('dueDate').split('/');
+        const dueDate = split[2] + "-" + split[0] + "-" + split[1];
+        PostProject(data.get('name'), data.get('description'), data.get('pmId'), startDate, dueDate);
+        navigate('#')
     };
 
     return (
@@ -155,6 +93,7 @@ const CreateProject = () => {
                         id="pmId"
                         name="pmId"
                         options={items}
+                        isOptionEqualToValue={(option, value) => option.id === value.id}
                         renderInput={(params) => <TextField {...params} label="Project Manager" />}
                     />
                     <br></br>
