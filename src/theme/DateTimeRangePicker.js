@@ -10,7 +10,6 @@ export default function DateTimeRangePicker(props) {
     const [value, setValue] = React.useState([null, null]);
   const [valuei, setValuei] = React.useState(null);
   const [valuef, setValuef] = React.useState(null);
-  console.log("Color: "+props.color);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>

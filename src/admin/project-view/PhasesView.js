@@ -20,7 +20,6 @@ export default function PhasesView(props) {
   const clickToDo = () => {
     setOpent(!opent);
   };
-  var i = 0;
 
   return (
     <List
