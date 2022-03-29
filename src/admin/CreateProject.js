@@ -12,13 +12,13 @@ import Stack from '@mui/material/Stack';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDateRangePicker from '@mui/lab/DesktopDateRangePicker';
-import getDevs from '../hooks/GetDevList';
+import getDevs from '../hooks/useDevs';
 import PostProject from '../hooks/admin/PostCreateProject';
 import { useNavigate } from 'react-router-dom';
 
 const CreateProject = () => {
     let navigate = useNavigate();
-    const [value, setValue] = React.useState([null, null]);
+    const [value, setValue] = React.useState([]);
     const [items, setItems] = useState([]);
 
     useEffect(() => {
@@ -31,9 +31,9 @@ const CreateProject = () => {
         // eslint-disable-next-line no-console
         console.log(data.get('pmId'));
         var split = data.get('startDate').split('/');
-        const startDate = split[2] + "-" + split[0] + "-" + split[1];
+        const startDate = `${split[2]}-${split[0]}-${split[1]}`;
         split = data.get('dueDate').split('/');
-        const dueDate = split[2] + "-" + split[0] + "-" + split[1];
+        const dueDate = `${split[2]}-${split[0]}-${split[1]}`;
         PostProject(data.get('name'), data.get('description'), data.get('pmId'), startDate, dueDate);
         navigate('#')
     };
