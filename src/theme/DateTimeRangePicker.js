@@ -8,8 +8,6 @@ import Typography from '@mui/material/Typography';
 
 export default function DateTimeRangePicker(props) {
     const [value, setValue] = React.useState([null, null]);
-  const [valuei, setValuei] = React.useState(null);
-  const [valuef, setValuef] = React.useState(null);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -23,9 +21,9 @@ export default function DateTimeRangePicker(props) {
             <Typography variant="caption">start date:</Typography>
              </Box>
             <MobileDateTimePicker
-              value={valuei}
+              value={props.valuei}
               onChange={(newValue) => {
-                setValuei(newValue);
+                props.setInitDate(newValue);
               }}
               renderInput={(params) => (
                 <input
@@ -40,10 +38,10 @@ export default function DateTimeRangePicker(props) {
                 <Typography variant="caption"> due date: </Typography>
             </Box>
             <MobileDateTimePicker
-              value={valuef}
+              value={props.valuef}
               onChange={(newValue) => {
-                if (newValue > valuei) {
-                  setValuef(newValue);
+                if (newValue > props.valuei) {
+                  props.setDueDate(newValue);
                 }
               }}
               renderInput={(params) => (

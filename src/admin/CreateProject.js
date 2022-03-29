@@ -20,6 +20,7 @@ const CreateProject = () => {
     let navigate = useNavigate();
     const [value, setValue] = React.useState([]);
     const [items, setItems] = useState([]);
+    const [pmId, setPmId] = React.useState([null, null]);
 
     useEffect(() => {
         getDevs(setItems);
@@ -29,7 +30,7 @@ const CreateProject = () => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         // eslint-disable-next-line no-console
-        console.log(data.get('pmId'));
+        console.log(pmId['id']);
         var split = data.get('startDate').split('/');
         const startDate = `${split[2]}-${split[0]}-${split[1]}`;
         split = data.get('dueDate').split('/');
@@ -52,7 +53,6 @@ const CreateProject = () => {
             >
             <Box
                 component="form"
-                noValidate
                 autoComplete="off"
                 onSubmit={handleSubmit}
             >
@@ -62,15 +62,15 @@ const CreateProject = () => {
                     <br></br>
                     <br></br>
                     <Grid item xs={20} sm={18}>
-                    <TextField
-                        size="small"
-                        required
-                        id="name"
-                        name="name"
-                        label="Project Name"
-                        fullWidth
-                        variant="standard"
-                    />
+                        <TextField
+                            size="small"
+                            required
+                            id="name"
+                            name="name"
+                            label="Project Name"
+                            fullWidth
+                            variant="standard"
+                        />
                     </Grid>
                     <br></br>
                     <Grid item xs={20} sm={18}>
@@ -90,11 +90,11 @@ const CreateProject = () => {
                         disablePortal
                         required
                         style={{ alignSelf: 'center' }}
-                        id="pmId"
-                        name="pmId"
                         options={items}
+                        id="pmId" name="pmId"
                         isOptionEqualToValue={(option, value) => option.id === value.id}
-                        renderInput={(params) => <TextField {...params} label="Project Manager" />}
+                        renderInput={(params) => <TextField {...params} required label="Project Manager" />}
+                        onChange={(e,value) => (setPmId(value))}
                     />
                     <br></br>
                     <LocalizationProvider dateAdapter={AdapterDateFns} style={{ alignSelf: 'center' }}>
