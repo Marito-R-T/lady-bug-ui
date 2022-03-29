@@ -77,10 +77,7 @@ function CreateCaseType() {
     };
 
     const handleAdd = () => {
-        console.log(isAdd);
         setAdd(true);
-     
-        console.log(isAdd);
     };
     
     const handleNo = () => {
@@ -89,7 +86,6 @@ function CreateCaseType() {
     
     const setAddNo = () => {
         setShowAdd(false);
-        console.log(showAdd)
     };
 
     const handleRemoveClick = (i) => {
@@ -111,8 +107,8 @@ function CreateCaseType() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        postNewCaseType('test', 'static_testing', rows.map((row) => row.name));
-
+        const data = new FormData(event.currentTarget);
+        postNewCaseType(data.get('name'), data.get('description'), rows.map((row) => row.name));
     }
 
 
@@ -278,17 +274,15 @@ function CreateCaseType() {
                                                                 {"Enter Phase Name"}
                                                             </DialogTitle>
                                                             <DialogContent>
-                                                                <DialogContentText id="alert-dialog-description">
-                                                                    <TextField
-                                                                        inputRef={valueRef}
-                                                                        size="small"
-                                                                        required
-                                                                        id="standard-required"
-                                                                        label="Name"
+                                                                <TextField
+                                                                    inputRef={valueRef}
+                                                                    size="small"
+                                                                    required
+                                                                    id="standard-required"
+                                                                    label="Name"
 
-                                                                        variant="standard"
-                                                                    />
-                                                                </DialogContentText>
+                                                                    variant="standard"
+                                                                />
                                                             </DialogContent>
                                                             <DialogActions>
                                                                 <Button
