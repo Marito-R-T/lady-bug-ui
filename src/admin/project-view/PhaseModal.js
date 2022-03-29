@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -10,6 +10,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import SaveIcon from '@mui/icons-material/Save';
+import getDevs from '../../hooks/GetDevList';
+import PostAssignPhase from '../../hooks/PostPhaseAssign';
 
 const style = {
   position: 'absolute',
@@ -25,8 +27,19 @@ const style = {
 };
 
 export default function PhaseModal(props) {
-    const saveInformation = (event) => {
-        console.log("saved");
+    const [items, setItems] = useState([]);
+    const [valuei, setValuei] = React.useState(null);
+    const [valuef, setValuef] = React.useState(null);
+    const [devId, setDevId] = React.useState(null);
+    const [description, setDescription] = React.useState();
+    useEffect(() => {
+        getDevs(setItems);
+    }, []);
+    const saveInformation = () => {
+        console.log(description);
+        if(valuei != null && valuef != null && devId != null && description != null){
+            PostAssignPhase(`${devId['id']}`, '1', '1', valuei, valuef, description);
+        }
     };
     return (
         <Modal
@@ -43,13 +56,13 @@ export default function PhaseModal(props) {
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={1}>
-                        <IconButton aria-label="delete" color="dark" onClick={saveInformation}>
+                        <IconButton aria-label="delete" color="dark" type="button" onClick={saveInformation}>
                             <SaveIcon />
                         </IconButton>
                     </Grid>
                 </Grid>
                 <Divider />
-                <DateTimeRangePicker color="#f15454"/>
+                <DateTimeRangePicker setInitDate={setValuei} setDueDate={setValuef} valuei={valuei} valuef={valuef} color="#f15454"/>
                 <Divider />
                 <Box sx={{ py: 1 }}/>
                 <Grid container spacing={2}>
@@ -58,44 +71,40 @@ export default function PhaseModal(props) {
                     </Grid>
                     <Grid item xs={12} sm={8}>
                         <Autocomplete
-                        disablePortal
-                        id="combo-box-demo"
-                        options={developers}
-                        sx={{ width: 300 }}
-                        renderInput={(params) => <TextField {...params} label="Developer Assigned" />}
+                            disablePortal
+                            required
+                            id="combo-box-demo"
+                            options={items}
+                            isOptionEqualToValue={(option, value) => option.id === value.id}
+                            sx={{ width: 300 }}
+                            renderInput={(params) => <TextField {...params} label="Developer Assigned" />}
+                            onChange={(e,value) => (setDevId(value))}
                         />
                     </Grid>
                 </Grid>
                 <Box py={2}/>
                 <TextField
-                id="dev-work"
-                label="Developer Work"
-                disabled
-                defaultValue={"Hola que tal asdfadsfasdfdasfdsafds"}
-                multiline
-                color = "dark"
-                fullWidth
-                rows={6}
+                    id="dev-work"
+                    label="Developer Work"
+                    disabled
+                    multiline
+                    color = "dark"
+                    fullWidth
+                    rows={6}
                 />
                 <Box py={2}/>
                 <TextField
-                id="comment"
-                label="Comment to Work"
-                multiline
-                color = "dark"
-                fullWidth
-                rows={6}
+                    id="comment"
+                    label="Comment to Work"
+                    required
+                    multiline
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    color = "dark"
+                    fullWidth
+                    rows={6}
                 />
             </Box>
         </Modal>
   );
 }
-
-const developers=[
-    { label:'Mario', age: 21 },
-    { label:'Sergio', age: 21 },
-    { label:'Zofia', age: 22 },
-    { label:'Soberanis', age: 22 },
-    { label:'Bryan', age: 21 },
-    { label:'Luis', age: 20 },
-]
