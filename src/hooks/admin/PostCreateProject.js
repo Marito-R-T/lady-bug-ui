@@ -1,21 +1,23 @@
 import Cookies from 'js-cookie';
+import axios from "axios";
 
-export default function PostProject(/*Name*/name, /*description*/desc, /*pm ID*/pmId, /*start Date*/sd, /*due Date*/dd) {
-    const auth = (Cookies.get('tokenType') + ' ' + Cookies.get('token'));
-    const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Acces-Control-Allow-Origin': '*', 'Authorization': auth},
-    body: JSON.stringify({
-        "name": name,
-        "description": desc,
-        "pmId": 4,
-        "startDate": sd,
-        "dueDate": dd
-      })
-    };
-    fetch('https://ladybugger.herokuapp.com/admin/create-project',requestOptions).then(res => res.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => {
-        console.log('Success:', response)
-    });
+export default async function PostProject(/*Name*/name, /*description*/desc, /*pm ID*/pmId, /*start Date*/sd, /*due Date*/dd) {
+    try {
+        const auth = (Cookies.get('tokenType') + ' ' + Cookies.get('token'));
+        const response = await axios.post('https://ladybugger.herokuapp.com/admin/create-project', {
+            name: name,
+            description: desc,
+            pmId: 4,
+            startDate: sd,
+            dueDate: dd
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': auth
+            }
+        });
+        console.log(response.data);
+    } catch(error) {
+        console.error(error)
+    }
 }

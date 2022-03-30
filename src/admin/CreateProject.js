@@ -14,11 +14,14 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDateRangePicker from '@mui/lab/DesktopDateRangePicker';
 import getDevs from '../hooks/useDevs';
 import PostProject from '../hooks/admin/PostCreateProject';
+import MomentUtils from '@date-io/date-fns';
 import { useNavigate } from 'react-router-dom';
+import DatePicker from '@mui/lab/DatePicker';
 
 const CreateProject = () => {
     let navigate = useNavigate();
-    const [value, setValue] = React.useState([]);
+    const [valuei, setValuei] = React.useState(null);
+    const [valuef, setValuef] = React.useState(null);
     const [items, setItems] = useState([]);
     const [pmId, setPmId] = React.useState([null, null]);
 
@@ -35,8 +38,9 @@ const CreateProject = () => {
         const startDate = `${split[2]}-${split[0]}-${split[1]}`;
         split = data.get('dueDate').split('/');
         const dueDate = `${split[2]}-${split[0]}-${split[1]}`;
-        PostProject(data.get('name'), data.get('description'), data.get('pmId'), startDate, dueDate);
-        navigate('#')
+        if(new Date(startDate) < new Date(dueDate)){
+            PostProject(data.get('name'), data.get('description'), data.get('pmId'), startDate, dueDate);
+        }
     };
 
     return (
@@ -46,7 +50,6 @@ const CreateProject = () => {
             <Box
             sx={{
                 marginTop: 15,
-                display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
             }}
@@ -97,25 +100,27 @@ const CreateProject = () => {
                         onChange={(e,value) => (setPmId(value))}
                     />
                     <br></br>
-                    <LocalizationProvider dateAdapter={AdapterDateFns} style={{ alignSelf: 'center' }}>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <Stack spacing={3}>
-                            <DesktopDateRangePicker
-                            startText="Desktop start"
-                            value={value}
-                            onChange={(newValue) => {
-                                setValue(newValue);
-                            }}
-                            renderInput={(startProps, endProps) => (
-                                <React.Fragment>
-                                <TextField {...startProps}
-                                    required
-                                    id="startDate" name="startDate" />
-                                <Box sx={{ mx: 2 }}> to </Box>
-                                <TextField {...endProps} 
-                                    required
-                                    id="dueDate" name="dueDate" />
-                                </React.Fragment>
-                            )}
+                            <DatePicker
+                                label="Start Date"
+                                value={valuei}
+                                onChange={(newValue) => {
+                                    if(valuef > newValue){
+                                        setValuei(newValue);
+                                    }
+                                }}
+                                renderInput={(params) => <TextField {...params} required id="startDate" name="startDate"/>}
+                            />
+                            <DatePicker
+                                label="Due Date"
+                                value={valuef}
+                                onChange={(newValue) => {
+                                    if(valuei < newValue){
+                                        setValuef(newValue);
+                                    }
+                                }}
+                                renderInput={(params) => <TextField {...params} required id="dueDate" name="dueDate"/>}
                             />
                         </Stack>
                     </LocalizationProvider>

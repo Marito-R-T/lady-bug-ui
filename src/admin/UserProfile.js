@@ -3,39 +3,28 @@ import '../App.css';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { useParams } from 'react-router-dom'
-import Cookies from 'js-cookie';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import axios from "axios";
+import GetProfile from '../hooks/GetProfile';
+import { useNavigate } from 'react-router-dom';
 
 function UserProfile() {
+    let navigate = useNavigate();
     //const [user, setUser] = React.useState(null)
     const { id } = useParams();
     const [user, setUser] = React.useState(null);
 
-    const getProfile = async () => {
-        const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
-        try {
-            const response = await axios.get(`https://ladybugger.herokuapp.com/ladybugger/profile/1`,
-                {
-                    headers: {
-                        'Authorization': auth
-                    }
-                }
-            );
-            return response.data;
-        } catch(error) {
-            console.error(error);
-        }
-    }
-
-
     useEffect(() => {
-        getProfile().then((profile) => setUser(profile) );
+        GetProfile(id).then((profile) => {
+        if(profile !== undefined){
+            setUser(profile);
+        } else {
+            navigate("/", { replace: true });
+        } });
     }, []);
 
 
