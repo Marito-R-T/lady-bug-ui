@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 

@@ -17,7 +17,6 @@ export default function CardSubmission (props) {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        let isAccepted = data.get('isAccepted') != null;
         PostRevisionPhase(data.get('isAccepted'), 1, data.get('reason'))
     }
     
@@ -57,7 +56,6 @@ export default function CardSubmission (props) {
                         </Typography>
                     </Grid>
                 </Grid>
-                { props.isPm === "PM" ?
                 <Box
                     component="form"
                     autoComplete="off"
@@ -96,8 +94,7 @@ export default function CardSubmission (props) {
                     </Button>
                     </Grid>
                 </Grid>
-                </Box> 
-                : null}
+                </Box>
             </CardContent>
         </Card>
     </Grid>

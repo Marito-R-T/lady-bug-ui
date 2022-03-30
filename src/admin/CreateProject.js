@@ -11,15 +11,11 @@ import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DesktopDateRangePicker from '@mui/lab/DesktopDateRangePicker';
 import getDevs from '../hooks/useDevs';
 import PostProject from '../hooks/admin/PostCreateProject';
-import MomentUtils from '@date-io/date-fns';
-import { useNavigate } from 'react-router-dom';
 import DatePicker from '@mui/lab/DatePicker';
 
 const CreateProject = () => {
-    let navigate = useNavigate();
     const [valuei, setValuei] = React.useState(null);
     const [valuef, setValuef] = React.useState(null);
     const [items, setItems] = useState([]);

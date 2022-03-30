@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import '../App.css';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
 import { useParams } from 'react-router-dom'
 
 import Box from '@mui/material/Box';
@@ -10,7 +8,6 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
 import {Link} from 'react-router-dom';
 
 
