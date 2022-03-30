@@ -29,8 +29,11 @@ export default function GeneralRow(props) {
               {project.id}
             </TableCell>
             <TableCell align='center'>{project.name}</TableCell>
-            <TableCell align='center'>{project.admin}</TableCell>
-            <TableCell align='center'>{project.status}</TableCell>
+            <TableCell align='center'>{project.pm_name}</TableCell>
+            {
+              project.status === 1 ? <TableCell align='center'>Activo</TableCell> 
+              : <TableCell align='center'>Inactivo</TableCell>
+            }
             <TableCell align='center'>{project.start_date}</TableCell>
             <TableCell align='center'>{project.due_date}</TableCell>
             <TableCell align='center'>{project.cases_amount}</TableCell>
@@ -54,8 +57,8 @@ GeneralRow.propTypes = {
     project: PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
-      admin: PropTypes.string.isRequired,
-      status: PropTypes.string.isRequired,
+      pm_name: PropTypes.string.isRequired,
+      status: PropTypes.number.isRequired,
       start_date: PropTypes.string.isRequired,
       due_date: PropTypes.string.isRequired,
       cases_amount: PropTypes.number.isRequired,

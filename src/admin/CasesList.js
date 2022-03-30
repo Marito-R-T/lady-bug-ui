@@ -10,27 +10,8 @@ import EnhancedTableHead from '../general/EnhancedTableHead';
 import EnhancedTableToolbar from '../general/EnhancedTableToolbar';
 import {stableSort, getComparator} from '../general/Sorting'
 import CaseRow from '../general/CaseRow';
-
-function createData(id, description, case_type, status, project, start_date, due_date) {
-  return {
-    id,
-    description,
-    case_type,
-    status,
-    project,
-    start_date,
-    due_date }
-}
-
-//Display purposes only, it will change
-const rows = [
-    createData(1, 'Case 1', 'Tipo 1', 'active', 'Project 1', '11-29-15', '11-29-22'),
-    createData(2, 'Case 2', 'Tipo 3', 'active', 'Project 2', '11-29-13', '10-29-22'),
-    createData(3, 'Case 3', 'Tipo 5', 'active', 'Project 3', '11-29-19', '09-29-22'),
-    createData(4, 'Case 4', 'Tipo 2', 'active', 'Project 4', '11-29-18', '08-29-22'),
-    createData(5, 'Case 5', 'Tipo 3', 'active', 'Project 1', '11-29-17', '07-29-22'),
-    createData(6, 'Case 6', 'Tipo 4', 'active', 'Project 1', '11-29-16', '06-29-22'),
-];
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const headCell = [
   {
@@ -72,6 +53,7 @@ export default function CasesList() {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
+  const [cases, setCases] = React.useState([]);
   const density = 68;
 
   const handleRequestSort = (event, property) => {
@@ -90,9 +72,30 @@ export default function CasesList() {
     setPage(0);
   };
 
+  const getCases = async (page, size) => {
+    const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
+      try {
+          const response = await axios.get(`https://ladybugger.herokuapp.com/admin/get-cases?page=${page}&size=${size}`,
+              {
+                  headers: {
+                      'Authorization': auth
+                  }
+              }
+          );
+          return response.data;
+        } catch(error) {
+          console.error(error);
+      }
+  }
+
+  React.useEffect(() => {
+    getCases(page, rowsPerPage).then((cases) => setCases(cases));
+    console.log(cases);
+  },[page, rowsPerPage]);
+
   // Used to avoid a layout jump on table when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - cases.length) : 0;
 
     return (
       <Paper sx={{ marginTop: '10%',
@@ -103,7 +106,7 @@ export default function CasesList() {
                   alignItems: 'center'
                 }}
       >
-        <EnhancedTableToolbar title={'Cases List'} data={rows} />        
+        <EnhancedTableToolbar header={'Cases List'} data={cases} />        
         <TableContainer>
             <Table aria-label="collapsible table" >
               <EnhancedTableHead 
@@ -114,10 +117,10 @@ export default function CasesList() {
               />
             <TableBody>
               {
-                stableSort(rows, getComparator(order, orderBy))
+                stableSort(cases, getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
-                    return <CaseRow cases={row} />
+                    return <CaseRow id={row.id} cases={row} />
                   })
               }
               { emptyRows > 0 && (
@@ -136,7 +139,7 @@ export default function CasesList() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={cases.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

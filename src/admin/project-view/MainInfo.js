@@ -69,15 +69,15 @@ function MainInfo(props) {
             </Typography>
             <Button variant="outlined" color="secondary" startIcon={<Avatar src={process.env.PUBLIC_URL + "/firefly.png"}/>}>
                 <Typography color={"dark.black"} variant="spam">
-                    {post.pmName}
+                    {post.pm_name}
                 </Typography>
             </Button>
             <Typography variant="body1" sx={{ columns: 1, columnSpacing: 5 }}>
                 <b>start date:</b>  
-                {"  "+post.startDate}
+                {"  "+post.start_date}
                 <b style={{ color:'#036666' }}>. . . . . . . . . . .</b>
                 <b>due date:</b>
-                {"  "+post.dueDate}
+                {"  "+post.due_date}
             </Typography>
           </Box>
         </Grid>
@@ -85,13 +85,5 @@ function MainInfo(props) {
     </Paper>
   );
 }
-
-MainInfo.propTypes = {
-  post: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    pmName: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default MainInfo;

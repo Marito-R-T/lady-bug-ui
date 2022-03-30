@@ -93,13 +93,13 @@ function CaseView(props) {
         <CardActionArea>
             <CardContent>
                 <Typography component="h2" variant="h5" color="dark.main">
-                {post.nameType}
+                {post.name}
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary">
-                Start Date {":  "+post.startDate}
+                Start Date {":  "+post.start_date}
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary">
-                Due Date {":  "+post.dueDate}
+                Due Date {":  "+post.due_date}
                 </Typography>
                 <Typography variant="subtitle1" paragraph>
                 {post.description}
@@ -107,7 +107,7 @@ function CaseView(props) {
                 <Typography variant="subtitle1" color="primary">
                 {post.status}
                 </Typography>
-                <StepCase name={post.id}/>
+                <StepCase name={post.actual}/>
             </CardContent>
         </CardActionArea>
             {(post.status !== "Canceled" && post.status !== "Finished") ? 
@@ -138,14 +138,5 @@ function CaseView(props) {
     </Grid>
   );
 }
-
-CaseView.propTypes = {
-  post: PropTypes.shape({
-    startDate: PropTypes.string.isRequired,
-    dueDate: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    nameType: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default CaseView;

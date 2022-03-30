@@ -10,33 +10,40 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
+import axios from "axios";
 
 function UserProfile() {
     //const [user, setUser] = React.useState(null)
     const { id } = useParams();
-    const [user, setUser] = React.useState();
+    const [user, setUser] = React.useState(null);
+
+    const getProfile = async () => {
+        const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
+        try {
+            const response = await axios.get(`https://ladybugger.herokuapp.com/ladybugger/profile/1`,
+                {
+                    headers: {
+                        'Authorization': auth
+                    }
+                }
+            );
+            return response.data;
+        } catch(error) {
+            console.error(error);
+        }
+    }
 
 
     useEffect(() => {
-        // const requestOptions = {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json', 'Acces-Control-Allow-Origin': '*' },
-        //     body: JSON.stringify({ id: id, token: Cookies.get('token') })
-        //   };
-        // const fetchUser = async () => {
-        //     console.log(Cookies.get('token'))
-        //     console.log(requestOptions)
-        //     const response = await fetch('https://ladybugger.herokuapp.com/profile/' + id, requestOptions);
-        //     setUser(response);
-        // }
-        // fetchUser();
+        getProfile().then((profile) => setUser(profile) );
     }, []);
 
 
     return (
         <div>
-            <Box
+            {
+                user !== null ? 
+                <Box
                 component="form"
                 sx={{
                     marginTop: 15,
@@ -44,7 +51,7 @@ function UserProfile() {
                 }}
                 noValidate
                 autoComplete="off"
-            >
+                >
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
                     <Stack direction="row" spacing={2}>
@@ -57,7 +64,7 @@ function UserProfile() {
 
                 </div>
                 <Typography sx={{ topMargin: '36px',mt: 3, mb: 2 }} variant="h2" color="dark.main" component="div">
-                    Jose Gomez
+                    {`${user.name} ${user.last_name}`}
                 </Typography>
                 <br></br>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -70,13 +77,13 @@ function UserProfile() {
                                 Email:
                             </Typography>
                             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                jgomez1995@gmail.com
+                                {user.email}
                             </Typography>
                             <Typography variant="h6" component="div" color="black">
                                 Full Name:
                             </Typography>
                             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                Jose Armando Gomez
+                                {`${user.name} ${user.middle_name} ${user.last_name}`}
                             </Typography>
                         </CardContent>
 
@@ -90,13 +97,13 @@ function UserProfile() {
                                 Projects Worked On:
                             </Typography>
                             <Typography sx={{ mb: 1.5 }} color="secondary">
-                                10
+                                {user.phases_worked_on}
                             </Typography>
                             <Typography variant="h6" component="div" color="black">
                                 User Creation Date
                             </Typography>
                             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                10/10/20
+                                {user.start_date}
                             </Typography>
                         </CardContent>
                         <CardActions>
@@ -104,18 +111,13 @@ function UserProfile() {
                         </CardActions>
 
                     </Card>
-
-
-
                 </div>
                 <br></br>
                 <br></br>
-
-
-
-            </Box>
+            </Box> : <p>loading profile data...</p>
+            }
         </div>
     );
 }
 
-export default UserProfile
+export default UserProfile;

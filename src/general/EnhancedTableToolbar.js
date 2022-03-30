@@ -8,7 +8,6 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import FilterDialog from './FilterDialog';
 
 export default function EnhancedTableToolbar(props) {
-    const { title } = props;
 
     return (
         <Toolbar
@@ -18,27 +17,18 @@ export default function EnhancedTableToolbar(props) {
             marginBottom: '0.5rem',
             marginTop: '0.5rem'
           }}
+        >    
+        <Typography
+          sx={{ flex: '1 1 100%', marginRight: '65rem' }}
+          variant="h5"
+          id="tableTitle"
         >
-          {(
-            <Typography
-              sx={{ flex: '1 1 100%', marginRight: '65rem' }}
-              variant="h5"
-              id="tableTitle"
-              component="div"
-            >
-              {title}
-            </Typography>
-          )}
-    
-          {(
-            <Tooltip title="Filter list">
-              <FilterDialog />
-            </Tooltip>
-          )}
+          {props.header}
+        </Typography>             
+        {/* <Tooltip title="Filter list">
+          <FilterDialog />
+        </Tooltip> */}
         </Toolbar>
       );
 }
     
-EnhancedTableToolbar.propTypes = {
-    title: PropTypes.object.isRequired,
-};

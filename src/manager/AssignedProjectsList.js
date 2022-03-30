@@ -10,6 +10,8 @@ import EnhancedTableHead from '../general/EnhancedTableHead';
 import EnhancedTableToolbar from '../general/EnhancedTableToolbar';
 import {stableSort, getComparator} from '../general/Sorting';
 import ProjectRow from '../general/ProjectRow';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 function createData(id, admin, name, due_date) {
   return {
@@ -32,10 +34,6 @@ const rows = [
 
 const headCell = [
   {
-    id: 'collapsible',
-    label: ''
-  },
-  {
     id: 'id',
     label: 'Project ID'
   },
@@ -50,6 +48,10 @@ const headCell = [
   {
     id: 'due_date',
     label: 'Due Date'
+  },
+  {
+    id: 'status',
+    label: 'Status'
   }
 ];
         
@@ -58,6 +60,7 @@ export default function AssignedProjectsList() {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
+  const [projects, setprojects] = React.useState([]);
   const density = 68;
 
   const handleRequestSort = (event, property) => {
@@ -76,9 +79,31 @@ export default function AssignedProjectsList() {
     setPage(0);
   };
 
+  const getProjects = async () => {
+    const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
+      try {
+          const response = await axios.get(`https://ladybugger.herokuapp.com/manager/get-assigned-projects`,
+              {
+                  headers: {
+                      'Authorization': auth
+                  }
+              }
+          );
+          console.log(response.data);
+          return response.data;
+        } catch(error) {
+          console.error(error);
+      }
+  }
+
+  React.useEffect(() => {
+    getProjects().then((projects) => setprojects(projects));
+    console.log(projects);
+  }, []);
+
   // Used to avoid a layout jump on table when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - projects.length) : 0;
 
     return (
       <Paper sx={{ marginTop: '10%',
@@ -89,7 +114,7 @@ export default function AssignedProjectsList() {
                   alignItems: 'center'
                 }}
       >
-        <EnhancedTableToolbar title={'Assigned Projects List'} data={rows} />        
+        <EnhancedTableToolbar header={'Assigned Projects List'} data={projects} />        
         <TableContainer>
             <Table aria-label="collapsible table" >
               <EnhancedTableHead 
@@ -100,7 +125,7 @@ export default function AssignedProjectsList() {
               />
             <TableBody>
               {
-                stableSort(rows, getComparator(order, orderBy))
+                stableSort(projects, getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return <ProjectRow project={row} />
@@ -122,7 +147,7 @@ export default function AssignedProjectsList() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={projects.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
