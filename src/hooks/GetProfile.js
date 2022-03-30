@@ -1,10 +1,10 @@
 import Cookies from 'js-cookie';
 import axios from "axios";
 
-export default async function GetProfile() {
+export default async function GetProfile(profile) {
     const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
     try {
-        const response = await axios.get(`https://ladybugger.herokuapp.com/ladybugger/profile/1`,
+        const response = await axios.get(`https://ladybugger.herokuapp.com/ladybugger/profile/${profile}`,
             {
                 headers: {
                     'Authorization': auth

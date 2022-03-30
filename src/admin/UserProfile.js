@@ -19,8 +19,8 @@ function UserProfile() {
     const [user, setUser] = React.useState(null);
 
     useEffect(() => {
-        GetProfile().then((profile) => {
-        if(profile != undefined){
+        GetProfile(id).then((profile) => {
+        if(profile !== undefined){
             setUser(profile);
         } else {
             navigate("/", { replace: true });
