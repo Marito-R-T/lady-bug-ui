@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import '../App.css';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -6,7 +6,6 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import Cookies from 'js-cookie';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import CssBaseline from '@mui/material/CssBaseline';
