@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 
 export default function PostPhaseDev(phaseAssignment, comment, hours, cost){
-    let yourDate = new Date();
+    let date = new Date();
     const auth = (Cookies.get('tokenType') + ' ' + Cookies.get('token'));
     const requestOptions = {
     method: 'POST',
@@ -11,7 +11,7 @@ export default function PostPhaseDev(phaseAssignment, comment, hours, cost){
         "comment": comment,
         "hours": hours,
         "cost": cost,
-        "date": yourDate.toISOString().split('T')[0]
+        "date": date.toISOString().split('T')[0]
       })
     };
     console.log(requestOptions);
