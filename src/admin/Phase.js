@@ -10,8 +10,8 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import CardSubmission from './CardSubmission';
 import PostPhaseDev from '../hooks/PhaseSubmit';
 
 
@@ -29,15 +29,12 @@ function Phase() {
         <Container component="main">
         <CssBaseline />
             <Box
-                component="form"
                 sx={{
                     marginTop: 15,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                 }}
-                autoComplete="off"
-                onSubmit={handleSubmit}
             >
                 
                 <Typography sx={{ topMargin: '36px',mt: 3, mb: 2 }} variant="h2" color="dark.main" component="div">
@@ -102,7 +99,15 @@ function Phase() {
                             </CardContent>
                         </Card>
                     </Grid>
+                    {sub.map((value) => (
+                        <CardSubmission sub={value} key={value.id} />
+                    ))}
                     <Grid item xs={12}>
+                    <Box
+                        component="form"
+                        autoComplete="off"
+                        onSubmit={handleSubmit}
+                    >
                         <Card color="secondary" sx={{ backgroundColor:'primary.clear' }}>
                             <CardContent>
                                 <TextField
@@ -160,12 +165,22 @@ function Phase() {
                                 </Button>
                             </CardContent>
                         </Card>
+                        </Box>
                     </Grid>
                 </Grid>
-
             </Box>
         </Container>
     );
 }
 
-export default Phase
+export default Phase;
+
+const sub = [
+    {
+        id: 1,
+        comment: "comment",
+        hours: 10,
+        cost: 55.55,
+        date: "2022-12-03"
+    }
+];
