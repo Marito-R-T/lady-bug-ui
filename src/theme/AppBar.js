@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,6 +9,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import { Outlet } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
+import Cookies from 'js-cookie';
 
 const drawerWidth = 0;
 
@@ -31,6 +32,12 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 function Layout() {
+  
+  useEffect(() => {
+      Cookies.remove('token');
+      Cookies.remove('tokenType');
+  }, []);
+
   return (
     <div>
         <AppBar position="absolute" color="neutral">

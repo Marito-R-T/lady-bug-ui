@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.css';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -13,9 +13,14 @@ import TextField from '@mui/material/TextField';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import CardSubmission from './CardSubmission';
 import PostPhaseDev from '../hooks/PhaseSubmit';
+import isPmDev from '../hooks/IsPMorDev';
+import { useParams } from 'react-router-dom';
 
 
 function Phase() {
+
+    let params = useParams();
+    const [isPm, setIsPm] = useState(null);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -24,6 +29,10 @@ function Phase() {
             PostPhaseDev(1, data.get("comment"), data.get("hours"), data.get("cost"));
         }
     }
+
+    useEffect(() => {
+        isPmDev(params.id, setIsPm);
+    }, []);
     
     return (
         <Container component="main">
@@ -99,74 +108,78 @@ function Phase() {
                             </CardContent>
                         </Card>
                     </Grid>
+                    
                     {sub.map((value) => (
-                        <CardSubmission sub={value} key={value.id} />
+                        <CardSubmission sub={value} key={value.id} isPm={isPm} />
                     ))}
+                    {isPm=== "DEV" ?
                     <Grid item xs={12}>
-                    <Box
-                        component="form"
-                        autoComplete="off"
-                        onSubmit={handleSubmit}
-                    >
-                        <Card color="secondary" sx={{ backgroundColor:'primary.clear' }}>
-                            <CardContent>
-                                <TextField
-                                    id="comment"
-                                    name="comment"
-                                    label="Comment to Work"
-                                    required
-                                    multiline
-                                    color = "dark"
-                                    fullWidth
-                                    rows={6}
-                                />
-                                <br></br>
-                                <br></br>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={6}>
-                                        <TextField
-                                            id="hours"
-                                            name="hours"
-                                            label="Hours"
-                                            fullWidth
-                                            required
-                                            type="number"
-                                            InputLabelProps={{
-                                                shrink: true,
-                                            }}
-                                        />
+                        <Box
+                            component="form"
+                            autoComplete="off"
+                            onSubmit={handleSubmit}
+                        >
+                            <Card color="secondary" sx={{ backgroundColor:'primary.clear' }}>
+                                <CardContent>
+                                    <TextField
+                                        id="comment"
+                                        name="comment"
+                                        label="Comment to Work"
+                                        required
+                                        multiline
+                                        color = "dark"
+                                        fullWidth
+                                        rows={6}
+                                    />
+                                    <br></br>
+                                    <br></br>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={6}>
+                                            <TextField
+                                                id="hours"
+                                                name="hours"
+                                                label="Hours"
+                                                fullWidth
+                                                required
+                                                type="number"
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <OutlinedInput
+                                                id="cost"
+                                                name="cost"
+                                                fullWidth
+                                                required
+                                                placeholder="Cost"
+                                                startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                                            />
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={6}>
-                                        <OutlinedInput
-                                            id="cost"
-                                            name="cost"
-                                            fullWidth
-                                            required
-                                            placeholder="Cost"
-                                            startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                                        />
-                                    </Grid>
-                                </Grid>
-                                <Button
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    sx={{ mt: 3, mb: 2 }}
-                                    color="dark"
-                                >
-                                    <Typography
-                                        component="h1"
-                                        color="white"
-                                        noWrap
-                                        sx={{ flexGrow: 1 }}
+                                    <Button
+                                        type="submit"
+                                        fullWidth
+                                        variant="contained"
+                                        sx={{ mt: 3, mb: 2 }}
+                                        color="dark"
                                     >
-                                        Submit Work
-                                    </Typography>
-                                </Button>
-                            </CardContent>
-                        </Card>
+                                        <Typography
+                                            component="h1"
+                                            color="white"
+                                            noWrap
+                                            sx={{ flexGrow: 1 }}
+                                        >
+                                            Submit Work
+                                        </Typography>
+                                    </Button>
+                                </CardContent>
+                            </Card>
                         </Box>
                     </Grid>
+                    : null
+                    }
                 </Grid>
             </Box>
         </Container>

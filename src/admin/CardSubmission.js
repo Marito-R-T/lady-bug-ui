@@ -57,6 +57,7 @@ export default function CardSubmission (props) {
                         </Typography>
                     </Grid>
                 </Grid>
+                { props.isPm === "PM" ?
                 <Box
                     component="form"
                     autoComplete="off"
@@ -95,7 +96,8 @@ export default function CardSubmission (props) {
                     </Button>
                     </Grid>
                 </Grid>
-                </Box>
+                </Box> 
+                : null}
             </CardContent>
         </Card>
     </Grid>

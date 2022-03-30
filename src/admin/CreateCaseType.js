@@ -9,6 +9,8 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Cookies from 'js-cookie';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
@@ -21,7 +23,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import axios from 'axios';
+import PostNewCaseType from '../hooks/admin/PostNewCaseType';
 
 
 const columns = [
@@ -48,28 +50,6 @@ function CreateCaseType() {
     const [showConfirm, setShowConfirm] = useState(false);
     const [showAdd, setShowAdd] = useState(false);
     const valueRef = useRef('');
-
-    const postNewCaseType = async (name, description, phases) => {
-        const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
-        try {
-            const response = await axios.post('https://ladybugger.herokuapp.com/admin/create-casetype', 
-              {
-                name: name, 
-                description: description,
-                phases: phases
-              },
-              {
-                headers: {
-                    'Authorization': auth
-                }
-              }
-            );
-            console.log('Success:', response.data)
-            // navigate("/profile/"+response.data.id, { replace: true });
-          } catch(error) {
-            console.error(error);
-          }   
-    }
 
     const handleConfirm = () => {
         setShowConfirm(true);
@@ -108,33 +88,29 @@ function CreateCaseType() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        postNewCaseType(data.get('name'), data.get('description'), rows.map((row) => row.name));
+        PostNewCaseType(data.get('name'), data.get('description'), rows.map((row) => row.name));
     }
-
-
-
-
-
     return (
-
-        <div>
-
-
+        <Container component="main" maxWidth="md">
+            <CssBaseline />
+            <Box
+            sx={{
+                marginTop: 15,
+                flexDirection: 'column',
+                alignItems: 'center',
+            }}
+            >
             <Box
                 component="form"
                 onSubmit={handleSubmit}
-                sx={{
-                    marginTop: 10,
-                    '& .MuiTextField-root': { m: 1, width: '65%' },
-                }}
-                noValidate
                 autoComplete="off"
             >
-                <h1>New Case Type  </h1>
-                <div className="container">
+                <Typography component="h1" variant="h3">
+                    New Case Type
+                </Typography>
+                <Container>
                     <TextField
-                        style={{ width: '20%' }}
-                        size="small"
+                        fullWidth
                         required
                         id='name'
                         name='name'
@@ -142,11 +118,10 @@ function CreateCaseType() {
                         variant="standard"
                     />
                     <br></br>
-
                     <Grid sx={{
                         marginTop: 5,
                         marginBottom: 5
-                    }} item xs={20} sm={18}>
+                    }} item >
                         <TextField
                             fullWidth
                             required
@@ -158,23 +133,13 @@ function CreateCaseType() {
 
                         />
                     </Grid>
-                    <h3>Phases  </h3>
-                    <Grid
-                        container
-                        spacing={0}
-                        direction="column"
-                        marginLeft='18%'
-                        justifyContent="center"
-                        width='6%'
-
-                    >
-                        <Button  onClick={handleAdd} 
-                            >
+                    <Typography component="h1" variant="h4">
+                        Add Phase
+                    </Typography>
+                        <Button  onClick={handleAdd} >
                             <AddBoxIcon onClick={handleAdd} />
                             ADD
                         </Button>
-                    </Grid>
-
                     <Grid
                         container
                         spacing={0}
@@ -184,9 +149,8 @@ function CreateCaseType() {
                         width='100%'
 
                     >
-
                         <Paper sx={{ align: 'center', overflow: 'hidden' }}>
-                            <TableContainer sx={{ maxHeight: 440 }}>
+                            <TableContainer>
                                 <Table stickyHeader aria-label="sticky table">
                                     <TableHead>
                                         <TableRow >
@@ -203,21 +167,15 @@ function CreateCaseType() {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-
                                         {rows.map((row, i) => {
                                             return (
-
                                                 <TableRow key={row.id+"_"+i} >
-
-
-
                                                     <TableCell key={row.id} align="center" component="th" scope="row" sx={{ maxWidth: 100, minWidth: 100 }}>
                                                         {row.id}
                                                     </TableCell>
                                                     <TableCell key={row.id + "_2"} align="center" sx={{ maxWidth: 500, minWidth: 400 }} >
                                                         {row.name}
                                                     </TableCell>
-
 
                                                     <TableCell
                                                         key={row.id + "_3"}
@@ -263,7 +221,6 @@ function CreateCaseType() {
 
                                                     )}
                                                     {isAdd && (
-
                                                         <Dialog
                                                             open={isAdd}
                                                             onClose={setAddNo}
@@ -295,20 +252,13 @@ function CreateCaseType() {
 
                                                             </DialogActions>
                                                         </Dialog>
-
                                                     )}
-
-
-
                                                 </TableRow>
-
                                             );
                                         })}
-
                                     </TableBody>
                                 </Table>
                             </TableContainer>
-
                         </Paper>
                     </Grid>
                     <br></br>
@@ -333,13 +283,14 @@ function CreateCaseType() {
                             sx={{ flexGrow: 1 }}
                         >Create</Typography>
                     </Button>
-                </div>
+                </Container>
             </Box >
 
             {/* {items.map(item => (
                 <h1 key={item.id}>{item.name}</h1>
             ))} */}
-        </div >
+        </Box>
+    </Container>
 
     );
 }
