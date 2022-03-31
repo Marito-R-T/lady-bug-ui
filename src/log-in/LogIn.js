@@ -28,9 +28,19 @@ export default function Login() {
         }
       );
       console.log('Success:', response.data)
-      Cookies.set('token', response.data.accessToken, { secure: true });
-      Cookies.set('tokenType', response.data.tokenType, {secure: true});
-      navigate("/profile/"+response.data.id, { replace: true });
+      console.log(response.data.roles[0])
+      let resp = response.data;
+      if(resp.roles.length > 0) {
+        let roles = resp.roles[0];
+        if(resp.roles.length > 1) {
+          roles = roles + ',' + resp.roles[1];
+        }
+        console.log(roles);
+        Cookies.set('roles', roles, {secure:true});
+      }
+      Cookies.set('token', resp.accessToken, { secure: true });
+      Cookies.set('tokenType', resp.tokenType, {secure: true});
+      navigate("/profile/"+resp.id, { replace: true });
     } catch(error) {
       console.error(error);
     }   

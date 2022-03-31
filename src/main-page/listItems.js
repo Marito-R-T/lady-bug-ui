@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -10,11 +10,22 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { Link } from 'react-router-dom';
 import DvrIcon from '@mui/icons-material/Dvr';
+import Cookies from 'js-cookie';
 
 export default function MainListItems() {
-  const [admin, setAdmin] = React.useState(true);
-  const [pm, setPm] = React.useState(true);
-  const [developer, setDeveloper] = React.useState(true);
+  const [admin, setAdmin] = React.useState(null);
+  const [developer, setDeveloper] = React.useState(null);
+
+  useEffect(() => {
+    let roles = Cookies.get('roles').split(',');
+    roles.forEach(element => {
+      if(element === "ROLE_ADMIN"){
+        setAdmin(true);
+      } else if (element === "ROLE_USER"){
+        setDeveloper(true);
+      }
+    });
+  }, []);
 
   return (
     <React.Fragment>
@@ -55,35 +66,31 @@ export default function MainListItems() {
           </ListItemIcon>
           <ListItemText primary="Create Case Type" />
         </ListItemButton>
-      </div>}
-      {(admin || pm) && <div>
         <ListItemButton component={Link} to="project-view">
           <ListItemIcon>
             <PeopleIcon />
           </ListItemIcon>
           <ListItemText primary="Project" />
         </ListItemButton>
-        <ListItemButton component={Link} to="user_phases/1">
-          <ListItemIcon>
-            <PeopleIcon />
-          </ListItemIcon>
-          <ListItemText primary="User Phases" />
-        </ListItemButton>
-      </div>}
-      {(pm) && <div>
-      </div>}
-      {developer && <div>
         <ListItemButton component={Link} to="cases-list">
           <ListItemIcon>
             <DvrIcon />
           </ListItemIcon>
           <ListItemText primary="Cases List" />
         </ListItemButton>
+      </div>}
+      {(developer||admin) && <div>
         <ListItemButton component={Link} to="phase/1">
           <ListItemIcon>
             <PeopleIcon />
           </ListItemIcon>
           <ListItemText primary="Phase" />
+        </ListItemButton>
+        <ListItemButton component={Link} to="user_phases/1">
+          <ListItemIcon>
+            <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText primary="User Phases" />
         </ListItemButton>
       </div>}
     </React.Fragment>
