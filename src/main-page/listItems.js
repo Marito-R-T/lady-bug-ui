@@ -92,6 +92,12 @@ export default function MainListItems() {
           </ListItemIcon>
           <ListItemText primary="User Phases" />
         </ListItemButton>
+        <ListItemButton component={Link} to="users-list">
+          <ListItemIcon>
+            <DvrIcon />
+          </ListItemIcon>
+          <ListItemText primary="Users List" />
+        </ListItemButton>
       </div>}
     </React.Fragment>
   );

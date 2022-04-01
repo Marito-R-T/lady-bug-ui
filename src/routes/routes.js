@@ -15,6 +15,7 @@ import Layout from '../theme/AppBar';
 import MainPage from '../main-page/MainPage';
 import ViewProject from '../admin/project-view/ViewProject';
 import AssignedProjectsList from '../manager/AssignedProjectsList';
+import UsersList from '../admin/UsersList';
 
 const RoutesClass = () => {
     return (
@@ -33,6 +34,7 @@ const RoutesClass = () => {
             <Route path="projects-list" element={<ProjectsList />}/>
             <Route path="assigned-projects" element={<AssignedProjectsList />}/>
             <Route path="cases-list" element={<CasesList />}/>
+            <Route path="users-list" element={<UsersList />}/>
           </Route>
         </Routes>
     );
