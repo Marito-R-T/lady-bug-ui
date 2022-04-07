@@ -88,6 +88,7 @@ function CreateCaseType() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         PostNewCaseType(data.get('name'), data.get('description'), rows.map((row) => row.name));
+        event.currentTarget.reset();
     }
     return (
         <Container component="main" maxWidth="md">

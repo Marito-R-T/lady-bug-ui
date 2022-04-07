@@ -30,7 +30,7 @@ const RoutesClass = () => {
             <Route path="create_project" element={<CreateProject />}/> 
             <Route path="create_case_type" element={<CreateCaseType />}/> 
             <Route path="add-developer" element={<CreateUser />}/>
-            <Route path="project-view" element={<ViewProject />} />
+            <Route path="project-view/:id" element={<ViewProject />} />
             <Route path="projects-list" element={<ProjectsList />}/>
             <Route path="assigned-projects" element={<AssignedProjectsList />}/>
             <Route path="cases-list" element={<CasesList />}/>

@@ -45,6 +45,10 @@ const headCell = [
   {
     id: 'cases_amount',
     label: 'Cases Amount'
+  },
+  {
+    id:'cancel',
+    label:"   "
   }
 ];
         
@@ -121,7 +125,7 @@ export default function ProjectsList() {
                 stableSort(projects, getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
-                    return <GeneralRow id={row.id} project={row} />
+                    return <GeneralRow id={row.id} project={row} key={row.id}/>
                   })
               }
               { emptyRows > 0 && (
@@ -130,7 +134,7 @@ export default function ProjectsList() {
                       height: density * emptyRows,
                     }}
                   >
-                    <TableCell colSpan={8} />
+                    <TableCell colSpan={headCell.length} />
                   </TableRow>
                 )
               }

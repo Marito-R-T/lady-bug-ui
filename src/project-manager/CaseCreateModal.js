@@ -13,6 +13,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import SaveIcon from '@mui/icons-material/Save';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import PostNewCase from '../hooks/manager/PostNewCase';
 
 const style = {
   position: 'absolute',
@@ -29,34 +30,9 @@ const style = {
 
 export default function CaseCreateModal(props) {
 
-    const postNewCase = async (title, startDate, dueDate, description, id, project) => {
-        const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
-        try {
-            const response = await axios.post('https://ladybugger.herokuapp.com/manager/create-case', 
-              {
-                title: title, 
-                startDate: startDate,
-                dueDate: dueDate, 
-                description: description, 
-                caseTypeId: id,
-                projectId: project
-              },
-              {
-                headers: {
-                    'Authorization': auth
-                }
-              }
-            );
-            console.log('Success:', response.data)
-            // navigate("/profile/"+response.data.id, { replace: true });
-          } catch(error) {
-            console.error(error);
-          }   
-    }
-
     const saveInformation = (event) => {
-        postNewCase('test_1', '2022-03-26', '2022-03-27', 'description_test', '1', '4');
-
+        PostNewCase('test_1', '2022-03-26', '2022-03-27', 'description_test', '1', '4');
+        event.currentTarget.reset();
     };
 
     return (

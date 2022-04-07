@@ -11,25 +11,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-
+import PostCreateUser from '../hooks/admin/PostCreateUser';
 
 export default function SignUp() {
   let navigate = useNavigate();
-  
-  const fetchLogin = async (/*firstName*/fN, /*middleName*/mN, /*lastName*/lN, /*email*/e, /*password*/p, /*roles*/r) => {
-    const auth = (Cookies.get('tokenType') + ' ' + Cookies.get('token'));
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Acces-Control-Allow-Origin': '*', 'Authorization': auth},
-      body: JSON.stringify({ email: e, password: p, name: fN, middleName: mN, lastName: lN, role: r })
-    };
-    await fetch('https://ladybugger.herokuapp.com/api/auth/create-user',requestOptions).then(res => res.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => {
-      console.log('Success:', response)
-      navigate("/add-developer");
-    });
-  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -43,7 +28,8 @@ export default function SignUp() {
     if(data.get('isAdmin')){
       roles.push("admin")
     }
-    fetchLogin(data.get('firstName'), data.get('middleName'), data.get('lastName'), data.get('email'), data.get('password'), roles);
+    PostCreateUser(data.get('email'),data.get('password'),  data.get('firstName'), data.get('middleName'), data.get('lastName'), roles);
+    event.currentTarget.reset();
   };
 
   return (

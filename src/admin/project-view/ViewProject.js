@@ -3,29 +3,16 @@ import Grid from '@mui/material/Grid';
 import MainInfo from './MainInfo';
 import CaseView from './CaseView';
 import Box from '@mui/material/Box';
-import axios from "axios";
-import Cookies from 'js-cookie';
+import GetProjectData from '../../hooks/GetProjectData';
+import { useParams } from 'react-router-dom';
 
 export default function Blog() {
     const [project, setProject] = React.useState(null);
-    const [id, setId] = React.useState(4);
+    let params = useParams();
 
     const getProjectData = async () => {
-      const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
-      try {
-          const response = await axios.get(`https://ladybugger.herokuapp.com/manager/get-project/${id}`,
-              {
-                  headers: {
-                      'Authorization': auth
-                  }
-              }
-          );
-          console.log(response.data);
-          return response.data;
-      } catch(error) {
-          console.error(error);
-          return null;
-      }
+      const response = await GetProjectData(params.id);
+      return response;
     }
 
     React.useEffect(() => {

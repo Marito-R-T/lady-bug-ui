@@ -36,6 +36,7 @@ const CreateProject = () => {
         const dueDate = `${split[2]}-${split[0]}-${split[1]}`;
         if(new Date(startDate) < new Date(dueDate)){
             PostProject(data.get('name'), data.get('description'), data.get('pmId'), startDate, dueDate);
+            event.currentTarget.reset();
         }
     };
 
@@ -102,7 +103,7 @@ const CreateProject = () => {
                                 label="Start Date"
                                 value={valuei}
                                 onChange={(newValue) => {
-                                    if(valuef > newValue){
+                                    if(valuef > newValue || valuef == null){
                                         setValuei(newValue);
                                     }
                                 }}
@@ -112,7 +113,7 @@ const CreateProject = () => {
                                 label="Due Date"
                                 value={valuef}
                                 onChange={(newValue) => {
-                                    if(valuei < newValue){
+                                    if(valuei < newValue || valuei == null){
                                         setValuef(newValue);
                                     }
                                 }}
