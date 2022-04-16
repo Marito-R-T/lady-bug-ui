@@ -37,6 +37,10 @@ const headCell = [
   {
     id: 'status',
     label: 'Status'
+  },
+  {
+    id: 'cancel',
+    label: 'Cancel'
   }
 ];
         
@@ -83,7 +87,6 @@ export default function UsersList() {
 
   React.useEffect(() => {
     getUsers(page, rowsPerPage).then((value) => setUsers(value));
-    console.log(users);
   },[page, rowsPerPage]);
 
   // Used to avoid a layout jump on table when reaching the last page with empty rows.
@@ -115,7 +118,7 @@ export default function UsersList() {
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
                         return <UserRow key={row.id} users={row} />
-                    }) : <p>loading data...</p>
+                    }) : <tr><td>loading data...</td></tr>
                 }
                 { emptyRows > 0 && (
                     <TableRow 

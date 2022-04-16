@@ -52,6 +52,10 @@ const headCell = [
   {
     id: 'status',
     label: 'Status'
+  },
+  {
+    id: 'cancel',
+    label: 'Cancel'
   }
 ];
         
@@ -98,7 +102,6 @@ export default function AssignedProjectsList() {
 
   React.useEffect(() => {
     getProjects().then((projects) => setprojects(projects));
-    console.log(projects);
   }, []);
 
   // Used to avoid a layout jump on table when reaching the last page with empty rows.

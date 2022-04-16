@@ -5,6 +5,8 @@ import Collapse from '@mui/material/Collapse';
 import Typography from '@mui/material/Typography';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import IconButton from '@mui/material/IconButton';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 export default function ProjectRow(props) {
     const { project } = props;
@@ -24,6 +26,15 @@ export default function ProjectRow(props) {
               project.status === 1 ? <TableCell align='center'>Activo</TableCell> 
               : <TableCell align='center'>Inactivo</TableCell>
             }
+            <TableCell align='center'>
+              {
+                project.status === 1 && (
+                  <IconButton color="primary" aria-label="upload picture" component="span">
+                    <CancelIcon />
+                  </IconButton>
+                )
+              }
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
