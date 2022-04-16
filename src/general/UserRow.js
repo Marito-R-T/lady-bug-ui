@@ -1,7 +1,8 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import IconButton from '@mui/material/IconButton';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 export default function UserRow(props) {
     const { users } = props;
@@ -20,6 +21,15 @@ export default function UserRow(props) {
               users.status === 1 ? <TableCell align='center'>Activo</TableCell> 
               : <TableCell align='center'>Inactivo</TableCell>
             }
+            <TableCell align='center'>
+              {
+                users.status === 1 && (
+                  <IconButton color="primary" aria-label="upload picture" component="span">
+                    <CancelIcon />
+                  </IconButton>
+                )
+              }
+            </TableCell>
           </TableRow>
           
         </React.Fragment>

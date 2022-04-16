@@ -1,17 +1,17 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import CancelIcon from '@mui/icons-material/Cancel';
+import { useNavigate } from 'react-router-dom';
 
 export default function GeneralRow(props) {
     const { project } = props;
     const [open, setOpen] = React.useState(false);
+    let navigate = useNavigate();
 
     return (
         <React.Fragment>
@@ -20,7 +20,7 @@ export default function GeneralRow(props) {
               <IconButton
                 aria-label="expand row"
                 size="small"
-                onClick={() => setOpen(!open)}
+                onClick={() => navigate("/project-view/"+project.id)}
               >
                 {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
               </IconButton>
@@ -37,16 +37,14 @@ export default function GeneralRow(props) {
             <TableCell align='center'>{project.start_date}</TableCell>
             <TableCell align='center'>{project.due_date}</TableCell>
             <TableCell align='center'>{project.cases_amount}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
-              <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 1 }}>
-                  <Typography variant="h6" gutterBottom component="div">
-                    Testing
-                  </Typography>
-                </Box>
-              </Collapse>
+            <TableCell align='center'>
+              {
+                project.status === 1 && (
+                  <IconButton color="primary" aria-label="upload picture" component="span">
+                    <CancelIcon />
+                  </IconButton>
+                )
+              }
             </TableCell>
           </TableRow>
         </React.Fragment>
@@ -61,6 +59,6 @@ GeneralRow.propTypes = {
       status: PropTypes.number.isRequired,
       start_date: PropTypes.string.isRequired,
       due_date: PropTypes.string.isRequired,
-      cases_amount: PropTypes.number.isRequired,
+      cases_amount: PropTypes.number.isRequired
     }).isRequired,
 };

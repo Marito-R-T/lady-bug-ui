@@ -45,6 +45,10 @@ const headCell = [
   {
     id: 'due_date',
     label: 'Due Date'
+  },
+  {
+    id: 'cancel',
+    label: 'Cancel'
   }
 ];
         
@@ -90,7 +94,6 @@ export default function CasesList() {
 
   React.useEffect(() => {
     getCases(page, rowsPerPage).then((cases) => setCases(cases));
-    console.log(cases);
   },[page, rowsPerPage]);
 
   // Used to avoid a layout jump on table when reaching the last page with empty rows.
@@ -120,7 +123,7 @@ export default function CasesList() {
                 stableSort(cases, getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
-                    return <CaseRow id={row.id} cases={row} />
+                    return <CaseRow id={row.id} cases={row} key={row.id} />
                   })
               }
               { emptyRows > 0 && (
