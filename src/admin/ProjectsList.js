@@ -93,6 +93,22 @@ export default function ProjectsList() {
       }
   }
 
+  const getAmountOfProjects = async () => {
+    const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
+      try {
+          const response = await axios.get(`https://ladybugger.herokuapp.com/admin/get-projects?page=${page}&size=${size}`,
+              {
+                  headers: {
+                      'Authorization': auth
+                  }
+              }
+          );
+          return response.data;
+        } catch(error) {
+          console.error(error);
+      }
+  };
+
   React.useEffect( () => {
     getProjects(page, rowsPerPage).then((projects) => setProjects(projects));
     console.log(projects);
@@ -144,7 +160,7 @@ export default function ProjectsList() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={projects.length}
+          count={projects.length + 1}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
