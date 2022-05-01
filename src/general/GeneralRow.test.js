@@ -24,6 +24,7 @@ test('component renders correct sent data', () => {
     component.getByText('project manager test');
     component.getByText('due date test');
     component.getByText('start date test');
+    component.getByText('Inactivo');
 });
 
 test('component contains correct amount of rows', () => {
@@ -37,3 +38,4 @@ test('component contains correct amount of cells', () => {
     const cells = component.getAllByRole('cell');
     expect(cells).toHaveLength(8);
 });
+
