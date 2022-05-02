@@ -16,7 +16,6 @@ import MainPage from '../main-page/MainPage';
 import ViewProject from '../admin/project-view/ViewProject';
 import AssignedProjectsList from '../manager/AssignedProjectsList';
 import UsersList from '../admin/UsersList';
-import { PrivateRoute } from './authPhase';
 
 const RoutesClass = () => {
     return (
