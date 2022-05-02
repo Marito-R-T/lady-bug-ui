@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import axios from "axios";
 
-export default async function isPmDev(id, setIsPm) {
+export default async function isPmDev(id) {
     const auth = (Cookies.get('tokenType') + ' ' + Cookies.get('token'));
     try {
         const response = await axios.get(`https://ladybugger.herokuapp.com/ladybugger/phase-job/${id}`,
@@ -12,8 +12,9 @@ export default async function isPmDev(id, setIsPm) {
             
             }
         });
-        setIsPm(response.data);
-        console.log(response.data)
+        return response.data
+        //setIsPm(response.data);
+        //console.log(response.data)
     } catch(error) {
         console.error(error)
     }
