@@ -24,8 +24,8 @@ const RoutesClass = () => {
             <Route path="login" element={<LogIn />}/>
           </Route>
           <Route path="/" element={<MainPage />}>
-            <Route path="profile/:id" element={<UserProfile/>}/> 
-            <Route path="phase/:id" element={<Phase/>}/> 
+            <Route path="profile/:id" element={<UserProfile/>}/>
+              <Route path="phase/:id" element={<Phase/>} />
             <Route path="user_phases/:id" element={<UserPhases/>}/> 
             <Route path="create_project" element={<CreateProject />}/> 
             <Route path="create_case_type" element={<CreateCaseType />}/> 

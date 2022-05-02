@@ -75,7 +75,10 @@ export default function CardSubmission (props) {
                     </Grid>
                     <Grid item xs={6}>
                     <FormGroup sx={{ pr:20 }}>
-                      <FormControlLabel name='isAccepted' required control={<Switch defaultChecked />} label="Accepted" />
+                        {props.isPm === 'DEV' ? 
+                            <FormControlLabel name='isAccepted' required control={<Switch defaultChecked />} label="Accepted" disabled /> :
+                            <FormControlLabel name='isAccepted' required control={<Switch defaultChecked />} label="Accepted" /> 
+                        }
                     </FormGroup>
                     </Grid>
                     <Grid item xs={6}>

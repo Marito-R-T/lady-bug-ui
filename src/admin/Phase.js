@@ -14,11 +14,12 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import CardSubmission from './CardSubmission';
 import PostPhaseDev from '../hooks/PhaseSubmit';
 import isPmDev from '../hooks/IsPMorDev';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 
 function Phase() {
 
+    let navigate = useNavigate();
     let params = useParams();
     const [isPm, setIsPm] = useState(null);
 
@@ -31,7 +32,14 @@ function Phase() {
     }
 
     useEffect(() => {
-        isPmDev(params.id, setIsPm);
+        isPmDev(params.id).then((result) => {
+        console.log(result)
+        if(result === 'None') {
+            navigate("/profile/1", { replace: true });
+        } else {
+            setIsPm(result)
+        }
+    })
     }, []);
     
     return (
