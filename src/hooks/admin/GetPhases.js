@@ -1,20 +1,18 @@
 import Cookies from 'js-cookie';
 import axios from "axios";
 
-export default async function GetProjectData(id) {
+export default async function getPhases(caseId) {
     const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
     try {
-        const response = await axios.get(`http://localhost:8080/manager/get-project/${id}`,
+        const response = await axios.get(`https://manager-dot-gcp-4a-348317.uc.r.appspot.com/manager/get-phases/${caseId}`,
             {
                 headers: {
                     'Authorization': auth
                 }
             }
         );
-        console.log(response.data);
         return response.data;
     } catch(error) {
         console.error(error);
-        return null;
     }
 }

@@ -4,7 +4,7 @@ import axios from "axios";
 export default async function isPmDev(id, setIsPm) {
     const auth = (Cookies.get('tokenType') + ' ' + Cookies.get('token'));
     try {
-        const response = await axios.get(`https://ladybugger.herokuapp.com/ladybugger/phase-job/${id}`,
+        const response = await axios.get(`http://localhost:8080/ladybugger/phase-job/${id}`,
         {
             headers: {
                 'Content-Type': 'application/json',

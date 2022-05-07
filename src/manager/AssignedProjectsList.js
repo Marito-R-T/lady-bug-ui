@@ -86,7 +86,7 @@ export default function AssignedProjectsList() {
   const getProjects = async () => {
     const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
       try {
-          const response = await axios.get(`https://ladybugger.herokuapp.com/manager/get-assigned-projects`,
+          const response = await axios.get(`http://localhost:8080/manager/get-assigned-projects`,
               {
                   headers: {
                       'Authorization': auth

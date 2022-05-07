@@ -21,7 +21,7 @@ export default function Login() {
 
   const fetchPhase = async (/*email*/e, /*password*/p) => {
     try {
-      const response = await axios.post('https://ladybugger.herokuapp.com/api/auth/sign-in', 
+      const response = await axios.post('http://localhost:8080/auth/login', 
         {
           email: e, 
           password: p

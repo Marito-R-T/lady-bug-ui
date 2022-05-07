@@ -72,14 +72,14 @@ export default function CasesList() {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    setRowsPerPage(parseInt(event.target.value, rowsPerPage));
+    setPage(page);
   };
 
   const getCases = async (page, size) => {
     const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
       try {
-          const response = await axios.get(`https://ladybugger.herokuapp.com/admin/get-cases?page=${page}&size=${size}`,
+          const response = await axios.get(`http://localhost:8080/admin/get-cases?page=${page}&size=${size}`,
               {
                   headers: {
                       'Authorization': auth
@@ -98,7 +98,7 @@ export default function CasesList() {
 
   // Used to avoid a layout jump on table when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - cases.length) : 0;
+    page > 0 ? Math.max(0, page * rowsPerPage - cases.length) : 0;
 
     return (
       <Paper sx={{ marginTop: '10%',
@@ -121,7 +121,6 @@ export default function CasesList() {
             <TableBody>
               {
                 stableSort(cases, getComparator(order, orderBy))
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return <CaseRow id={row.id} cases={row} key={row.id} />
                   })
@@ -142,7 +141,7 @@ export default function CasesList() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={cases.length}
+          count={cases.length + 1}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

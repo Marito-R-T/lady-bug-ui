@@ -4,7 +4,7 @@ import axios from "axios";
 export default async function PostAssignPmProject(developer, project) {
     try {
         const auth = (Cookies.get('tokenType') + ' ' + Cookies.get('token'));
-        const response = await axios.post('https://ladybugger.herokuapp.com/admin/assign-project', {
+        const response = await axios.post('http://localhost:8080/admin/assign-project', {
             employeeId: developer,
             projectId: project
         }, {

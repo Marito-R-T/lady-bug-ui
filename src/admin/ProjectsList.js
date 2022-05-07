@@ -73,14 +73,14 @@ export default function ProjectsList() {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    setRowsPerPage(parseInt(event.target.value, rowsPerPage));
+    setPage(page);
   };
 
   const getProjects = async (page, size) => {
     const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
       try {
-          const response = await axios.get(`https://ladybugger.herokuapp.com/admin/get-projects?page=${page}&size=${size}`,
+          const response = await axios.get(`http://localhost:8080/admin/get-projects?page=${page}&size=${size}`,
               {
                   headers: {
                       'Authorization': auth
@@ -93,22 +93,6 @@ export default function ProjectsList() {
       }
   }
 
-  const getAmountOfProjects = async () => {
-    const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
-      try {
-          const response = await axios.get(`https://ladybugger.herokuapp.com/admin/get-projects?page=${page}&size=${size}`,
-              {
-                  headers: {
-                      'Authorization': auth
-                  }
-              }
-          );
-          return response.data;
-        } catch(error) {
-          console.error(error);
-      }
-  };
-
   React.useEffect( () => {
     getProjects(page, rowsPerPage).then((projects) => setProjects(projects));
     console.log(projects);
@@ -116,7 +100,7 @@ export default function ProjectsList() {
 
   // Used to avoid a layout jump on table when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - projects.length) : 0;
+    page > 0 ? Math.max(0, page * rowsPerPage - projects.length) : 0;
 
     return (
       <Paper sx={{ marginTop: '10%',
@@ -139,7 +123,6 @@ export default function ProjectsList() {
             <TableBody>
               {
                 stableSort(projects, getComparator(order, orderBy))
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return <GeneralRow id={row.id} project={row} key={row.id}/>
                   })

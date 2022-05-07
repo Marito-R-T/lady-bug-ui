@@ -16,7 +16,7 @@ export default function PostAssignPhase(devId, phaseId, caseId, /*start Date*/sd
         "description": description
       })
     };
-    fetch('https://ladybugger.herokuapp.com/manager/assign-phase',requestOptions).then(res => res.json())
+    fetch('http://localhost:8080/manager/assign-phase',requestOptions).then(res => res.json())
     .catch(error => console.error('Error:', error))
     .then(response => {
         console.log('Success:', response)

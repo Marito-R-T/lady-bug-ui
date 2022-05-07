@@ -17,6 +17,7 @@ export default function Blog() {
 
     React.useEffect(() => {
       getProjectData().then((project) => setProject(project));
+      console.log(project)
     }, []);
 
     return (

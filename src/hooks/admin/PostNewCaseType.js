@@ -4,7 +4,7 @@ import axios from "axios";
 export default async function PostNewCaseType(name, description, phases) {
     const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
     try {
-        const response = await axios.post('https://ladybugger.herokuapp.com/admin/create-casetype', 
+        const response = await axios.post('http://localhost:8080/admin/create-casetype', 
           {
             name: name, 
             description: description,

@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default async function useDevs(setItems) {
     try {
-        const response = await axios.get('https://ladybugger.herokuapp.com/admin/devs-list');
+        const response = await axios.get('https://localhost:8080/admin/devs-list');
         let list = [];
         response.data.forEach(e => {
             if(e[2] == null) {

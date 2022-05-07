@@ -15,7 +15,7 @@ export default function PostPhaseDev(phaseAssignment, comment, hours, cost){
       })
     };
     console.log(requestOptions);
-    fetch('https://ladybugger.herokuapp.com/developer/submit',requestOptions).then(res => res.json())
+    fetch('http://localhost:8080/developer/submit',requestOptions).then(res => res.json())
     .catch(error => console.error('Error:', error))
     .then(response => {
         console.log('Success:', response)

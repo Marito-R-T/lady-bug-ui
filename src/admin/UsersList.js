@@ -64,14 +64,14 @@ export default function UsersList() {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    setRowsPerPage(parseInt(event.target.value, rowsPerPage));
+    setPage(page);
   };
 
   const getUsers = async (page, size) => {
     const auth = `${Cookies.get('tokenType')} ${Cookies.get('token')}`;
       try {
-          const response = await axios.get(`https://ladybugger.herokuapp.com/admin/get-users?page=${page}&size=${size}`,
+          const response = await axios.get(`https://localhost:8080/admin/get-users?page=${page}&size=${size}`,
               {
                   headers: {
                       'Authorization': auth
@@ -91,7 +91,7 @@ export default function UsersList() {
 
   // Used to avoid a layout jump on table when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - users.length) : 0;
+    page > 0 ? Math.max(0, page * rowsPerPage - users.length) : 0;
 
     return (
         <Paper sx={{ marginTop: '10%',
@@ -115,7 +115,6 @@ export default function UsersList() {
                 {
                     users.length !== 0 ?
                     stableSort(users, getComparator(order, orderBy))
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
                         return <UserRow key={row.id} users={row} />
                     }) : <tr><td>loading data...</td></tr>
@@ -136,7 +135,7 @@ export default function UsersList() {
             <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={users.length}
+            count={users.length + 1}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import Popover from '@mui/material/Popover';
 import CancelIcon from '@mui/icons-material/Cancel';
+import getPhases from '../../hooks/admin/GetPhases';
 
 const actual = {
     nameType: 'N',
@@ -86,6 +87,11 @@ function CaseView(props) {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
+  React.useEffect(() => {
+    // getPhases(post.id).then(())
+  }, []);
+
+ 
   return (
     <Grid item xs={12} md={12} sx={{ py:5 }} >
     <Card sx={{ backgroundColor:'primary.clear', columnCount:1 }}>

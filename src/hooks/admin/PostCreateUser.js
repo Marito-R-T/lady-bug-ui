@@ -4,7 +4,7 @@ import axios from "axios";
 export default async function PostCreateUser(email, password, name, middleName, lastName, role) {
     try {
         const auth = (Cookies.get('tokenType') + ' ' + Cookies.get('token'));
-        const response = await axios.post('https://ladybugger.herokuapp.com/api/auth/create-user', {
+        const response = await axios.post('http://localhost:8080/api/auth/create-user', {
             email: email,
             password: password,
             name: name,
